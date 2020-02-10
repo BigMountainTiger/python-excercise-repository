@@ -4,5 +4,18 @@
       "path": "/home/song/sandbox/python-excercise-repository/a_01_oo_excercise"
     }
   ],
-  "settings": {}
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.gitignore": true,
+      "**/LICENSE": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/__pycache__": true,
+      "**/environment-3.4": true
+    },
+    "python.pythonPath": "${workspaceFolder}/../environment-3.4/bin/python"
+  }
 }
