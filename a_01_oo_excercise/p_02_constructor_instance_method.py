@@ -5,7 +5,7 @@ class AClass:
     self.attr_2 = attr_2
 
   def print_attributes(self):
-    print(self.attr_1 + ' - ' + self.attr_2)
+    print("{} - {}".format(self.attr_1, self.attr_2))
 
 # Create two instances
 obj_1 = AClass('obj_1_a1', 'obj_1_a2')
