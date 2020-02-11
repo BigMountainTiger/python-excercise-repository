@@ -7,11 +7,11 @@ class AClass:
     self.a_instance_attr = 'The instance attribute'
 
   def an_instance_method(self):
-    print(self.a_instance_attr)
+    print("From the instance method - {}".format(self.a_instance_attr))
 
   @classmethod
   def a_class_method(cls):
-    print(cls.a_class_attr)
+    print("From the class method - {}".format(cls.a_class_attr))
   
   @staticmethod
   def a_static_mathod():
