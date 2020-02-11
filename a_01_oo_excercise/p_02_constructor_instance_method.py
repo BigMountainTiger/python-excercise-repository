@@ -14,3 +14,4 @@ obj_2 = AClass('obj_2_a1', 'obj_2_a2')
 # Call the instance method
 obj_1.print_attributes()
 obj_2.print_attributes()
+print()

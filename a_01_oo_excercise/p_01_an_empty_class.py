@@ -15,3 +15,4 @@ print(obj_1.__dict__)
 # Attributes can be deleted from an object
 del obj_1.attribute2
 print(obj_1.__dict__)
+print()

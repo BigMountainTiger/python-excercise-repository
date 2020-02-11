@@ -15,13 +15,16 @@ obj_1 = AClass()
 # both the instance reference and the class name
 obj_1.print_class_attribute_by_self_reference()
 obj_1.print_class_attribute_by_class_name()
+print()
 
 # Add a instance attribute with the same name
 obj_1.a_class_attr = 'This can override the class attribute'
 obj_1.print_class_attribute_by_self_reference()
 obj_1.print_class_attribute_by_class_name()
+print()
 
 # Delete the instance attribute
 del obj_1.a_class_attr
 obj_1.print_class_attribute_by_self_reference()
 obj_1.print_class_attribute_by_class_name()
+print()
