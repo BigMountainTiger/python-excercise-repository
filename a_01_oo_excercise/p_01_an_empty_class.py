@@ -2,6 +2,7 @@
 class EmptyClass:
   pass
 
+# Create an instance of the class
 obj_1 = EmptyClass()
 
 # Attrubutes can be added to an object dynamically
