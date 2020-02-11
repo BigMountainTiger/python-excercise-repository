@@ -25,7 +25,6 @@ obj_1.a_class_method()
 obj_1.a_static_mathod()
 print()
 
-# Class and static methods are accessible by
-# the class name
+# Class and static methods can be accessed by the class name
 AClass.a_class_method()
 AClass.a_static_mathod()
