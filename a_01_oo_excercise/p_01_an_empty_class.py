@@ -10,6 +10,9 @@ obj_1.attribute1 = "The attribute 1"
 obj_1.attribute2 = "The attribute 2"
 
 print(obj_1.attribute1 + ' - ' + obj_1.attribute2)
+
+# The __dict__ has all the information
+print('The __dict__:')
 print(obj_1.__dict__)
 
 # Attributes can be deleted from an object
