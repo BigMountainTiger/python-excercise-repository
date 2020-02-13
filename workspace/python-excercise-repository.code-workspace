@@ -2,6 +2,9 @@
 	"folders": [
     {
       "path": "/home/song/sandbox/python-excercise-repository/a_01_oo_excercise"
+    },
+    {
+      "path": "/home/song/sandbox/python-excercise-repository/b_01_apache-spark-excercise"
     }
   ],
   "settings": {
