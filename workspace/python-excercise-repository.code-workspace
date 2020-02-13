@@ -19,6 +19,6 @@
       "**/__pycache__": true,
       "**/environment-3.4": true
     },
-    "python.pythonPath": "${workspaceFolder}/../environment-3.4/bin/python"
+    "python.pythonPath": "/home/song/sandbox/python-excercise-repository/environment-3.4/bin/python"
   }
 }
