@@ -4,7 +4,7 @@ import os
 def getAList(id):
   return ['This', 'is', 'Item-{}-{}'.format(id, os.getpid())]
 
-if __name__ == "__main__":
+def a_03_flatamp_parallel():
   conf = SparkConf().setAppName("word count") \
     .setMaster("local[2]")
 
@@ -23,3 +23,6 @@ if __name__ == "__main__":
 
   count = rdd.count()
   print('Total count - {}'.format(count))
+
+if __name__ == "__main__":
+  a_03_flatamp_parallel()
