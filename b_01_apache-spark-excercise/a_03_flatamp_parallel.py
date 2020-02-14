@@ -21,7 +21,7 @@ def a_03_flatamp_parallel():
 
   file_paths = [path_1, path_2]
   rdd = context.parallelize(file_paths, 2) \
-    .flatMap(lambda id: getAListFromAFile(id)).cache()
+    .flatMap(getAListFromAFile).cache()
   
   print('No of partitions = {}'.format(rdd.getNumPartitions()))
   wordCounts = rdd.countByValue()
