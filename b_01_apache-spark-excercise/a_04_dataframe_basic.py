@@ -23,6 +23,10 @@ def run():
   total = people.groupBy().sum('age').collect()[0][0]
   print('Total age is {}'.format(total))
 
+  people.createTempView('people_table')
+  new_people = sqlContext.sql('select name, age from people_table order by age desc limit 1')
+  new_people.show()
+  
 # Run the app
 if __name__ == "__main__":
   run()
