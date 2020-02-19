@@ -6,6 +6,10 @@ if __name__ == "__main__":
 
     context = SparkContext(conf = conf)
     context.setLogLevel('ERROR')
+
+    # This is to find the number of workers in the cluster. But it is not correct
+    no_of_workers = context.statusTracker().getActiveJobsIds()
+    print('No. of workers = {}'.format(no_of_workers))
     
     data = ('This', 'is', 'is', 'cool')
     rdd = context.parallelize(data, 2).cache()
