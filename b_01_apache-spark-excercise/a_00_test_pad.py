@@ -1,3 +1,7 @@
+import platform
+
+
+
 def run():
   dir = '/home/song/sandbox/python-excercise-repository/' \
     + 'b_01_apache-spark-excercise/test-files/a_03/{}'
@@ -14,4 +18,5 @@ def run():
   print(lines_1)
 
 if __name__ == "__main__":
+  print(platform.node())
   run()
