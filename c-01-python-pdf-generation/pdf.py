@@ -31,7 +31,7 @@ sourceHtml = template.render(json_data=body['data'])
 outoutputFolder = './pdf-files/'
 outputFilename = outoutputFolder + 'invoice.pdf'
 
-def clearPdf(outoutputFolder):
+def clearPdf():
   files = glob.glob(outoutputFolder + '*')
   for f in files:
       os.remove(f)
@@ -95,7 +95,7 @@ def mergeAll():
 
 if __name__ == '__main__':
     # pisa.showLogging()
-    clearPdf(outoutputFolder)
+    clearPdf()
     #convertAll()
     convertAll_by_stream()
     # mergeAll()
