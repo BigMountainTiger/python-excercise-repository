@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="invoice.css">
+  </head>
+  
+  <body style="font-size: 50px;">
+    <div class="name">
+      Name: {{ json_data.company_name }}
+    </div> 
+
+    <div>
+      City/State: <span style="font-size: 12pt; font-family: Verdana;">{{ json_data.city }}, {{ json_data.state }}</span>
+    </div>
+
+    <div>
+      Date: {{ json_data.order_creation_date }}
+    </div>
+
+    <div>
+      Order ID: {{ json_data.order_id }}
+    </div>
+
+    <img src="/home/song/Sandbox/experiments/py-pdf-player/python-excercise-repository/python-pdf-generation/template/Big.jpeg" />
+
+</body>
+</html>
