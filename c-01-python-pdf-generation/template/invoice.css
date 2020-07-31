@@ -1,3 +1,11 @@
+/* https://stackoverflow.com/questions/3341485/how-to-make-a-html-page-in-a4-paper-size-pages */
+
+body{
+  width: 21cm;
+  height: 29.7cm;
+  margin: 3mm 4.5mm 3mm 4.5mm; 
+}
+
 .name {
   font-style: italic;
   font-size: 20pt;

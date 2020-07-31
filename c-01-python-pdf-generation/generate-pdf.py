@@ -1,6 +1,8 @@
 # https://stackoverflow.com/questions/59134487/how-to-generate-a-pdf-with-a-given-template-with-dynamic-data-in-python-or-node
 # https://medium.com/@MicroPyramid/generating-pdf-files-in-python-using-xhtml2pdf-34698c63051f
 # https://stackoverflow.com/questions/23361810/how-to-change-page-size-in-pdf-generated-by-pisa
+# https://stackoverflow.com/questions/3341485/how-to-make-a-html-page-in-a4-paper-size-pages
+
 
 import os
 import io
@@ -27,7 +29,7 @@ body = {
     }
 }
 
-sourceHtml = template.render(json_data=body['data'])
+sourceHtml = template.render(d=body['data'])
 outoutputFolder = './pdf-files/'
 outputFilename = outoutputFolder + 'invoice.pdf'
 
@@ -45,12 +47,12 @@ def convertHtmlToPdf(sourceHtml, outputFilename):
 
 def convertHtmlToPdf_stream(sourceHtml, i):
     f_stream = io.BytesIO()
-    data = copy.deepcopy(body);
+    data = copy.deepcopy(body)
     
     order_id = i + 1
     data['data']['order_id'] = order_id
     data['data']['company_name'] = data['data']['company_name'] + ' ' + str(order_id)
-    sourceHtml = template.render(json_data=data['data'])
+    sourceHtml = template.render(d=data['data'])
     pisaStatus = pisa.CreatePDF(src = sourceHtml, dest = f_stream)
 
     return f_stream
