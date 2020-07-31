@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="invoice.css">
+    <style>
+      body {
+        width: 21cm;
+        height: 29.7cm;
+        font-size: 20pt;
+      }
+
+      .name {
+        font-style: italic;
+        font-weight: bold;
+        font-size: 7pt;
+      }
+    </style>
   </head>
   
-  <body style="font-size: 50px;">
-    <div class="name">
+  <body>
+    <div class="name" style="background-color: red;">
       Name: {{ d.company_name }}
     </div> 
 
     <div>
-      City/State: <span style="font-size: 12pt; font-family: Verdana;">{{ d.city }}, {{ d.state }}</span>
+      City/State: <span style="font-size: 12pt; font-weight: bold;">{{ d.city }}, {{ d.state }}</span>
     </div>
 
     <div>
@@ -21,7 +33,13 @@
       Order ID: {{ d.order_id }}
     </div>
 
-    <img src="/home/song/Sandbox/python-examples/python-excercise-repository/c-01-python-pdf-generation/template/Big.jpeg" />
+    <br/><br/><br/><br/>
+
+    <div style="width: 100%; background-color: red; position: relative;">
+      &nbsp;<span style="position: absolute; display: inline-block; left: 100px;">Find</span>
+    </div>
+
+    <img style="height: auto;" src="/home/song/Sandbox/python-examples/python-excercise-repository/c-01-python-pdf-generation/template/Big.jpeg" />
 
 </body>
 </html>

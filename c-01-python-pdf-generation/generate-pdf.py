@@ -77,7 +77,7 @@ def convertAll_by_stream():
   start_time = time.time()
 
   merger = PdfFileMerger()
-  for i in range(10):
+  for i in range(2):
       f_stream = convertHtmlToPdf_stream(sourceHtml, i)
       merger.append(f_stream)
 
