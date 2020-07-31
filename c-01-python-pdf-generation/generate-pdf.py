@@ -2,7 +2,9 @@
 # https://medium.com/@MicroPyramid/generating-pdf-files-in-python-using-xhtml2pdf-34698c63051f
 # https://stackoverflow.com/questions/23361810/how-to-change-page-size-in-pdf-generated-by-pisa
 # https://stackoverflow.com/questions/3341485/how-to-make-a-html-page-in-a4-paper-size-pages
+# https://fwpn.org.pl/assets/event_attachments/asd.html
 
+# xhtml2pdf --css-dump > xhtml2pdf-default.css
 
 import os
 import io
