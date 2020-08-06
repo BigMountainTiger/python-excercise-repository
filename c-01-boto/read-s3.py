@@ -4,23 +4,29 @@
 import boto3
 
 def read_s3():
-  s3 = boto3.client('s3',
-    aws_access_key_id='Key',
-    aws_secret_access_key='s-key'
-  )
+
+  session = boto3.Session(profile_name = 'snowflake')
+  s3 = session.client('s3')
 
   r = s3.select_object_content(
         Bucket='mlg-snowpipe',
         Key='Lead.txt',
         ExpressionType='SQL',
-        Expression="select * from s3object s WHERE s.propertyCounty <> null limit 2",
+        Expression="select * from s3object s WHERE s.LeadID = '90403765' limit 1",
+        #Expression="select * from s3object",
         InputSerialization = {'CSV': {'FileHeaderInfo': 'USE', 'FieldDelimiter': '|'}},
-        OutputSerialization = {'CSV': {'FieldDelimiter': '|'}}
+        OutputSerialization = {'CSV': {'FieldDelimiter': '|'}},
+        # ScanRange={
+        # 'Start': 30000,
+        # 'End': 35000
+        # }
       )
 
   for event in r['Payload']:
     if 'Records' in event:
-        records = event['Records']['Payload'].decode('utf-8')
+        payload = event['Records']['Payload']
+        records = payload.decode('utf-8')
+        print(payload)
         print(records)
 
     elif 'Stats' in event:
