@@ -1,0 +1,9 @@
+ ~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/sbin/start-master.sh
+
+ http://localhost:8080/ => Web page
+
+~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/sbin/start-slave.sh spark://song-Latitude-E6230:7077
+
+=>
+
+~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/bin/spark-submit --master spark://song-Latitude-E6230:7077 ./b_01_apache-spark-excercise/a_02_word-count.py

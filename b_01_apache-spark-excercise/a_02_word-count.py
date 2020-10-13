@@ -2,8 +2,8 @@ import sys
 from pyspark import SparkContext, SparkConf
 
 if __name__ == "__main__":
-    conf = SparkConf().setAppName("word count") \
-      .setMaster("local[2]")
+    conf = SparkConf().setAppName("word count")
+    #conf.setMaster("local[2]")
 
     context = SparkContext(conf = conf)
     context.setLogLevel('ERROR')
