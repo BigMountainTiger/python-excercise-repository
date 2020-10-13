@@ -7,3 +7,6 @@
 =>
 
 ~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/bin/spark-submit --master spark://song-Latitude-E6230:7077 ./b_01_apache-spark-excercise/a_02_word-count.py
+
+~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/sbin/stop-slave.sh 
+~/Development/apache-spark/spark-2.4.5-bin-hadoop2.7/sbin/stop-master.sh
