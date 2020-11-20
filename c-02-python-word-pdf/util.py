@@ -9,7 +9,8 @@ def clearDirectory(directory):
     os.remove(f)
 
 # docx_replace
-def docx_replace(doc, regex , replace):
+def docx_replace(doc, regex, replace):
+
   for p in doc.paragraphs:
     if regex.search(p.text):
       inline = p.runs
@@ -21,7 +22,7 @@ def docx_replace(doc, regex , replace):
   for table in doc.tables:
     for row in table.rows:
       for cell in row.cells:
-        docx_replace(cell, regex , replace)
+        docx_replace(cell, regex, replace)
 
 # doc2pdf
 def doc2pdf(word_file, result_path):  

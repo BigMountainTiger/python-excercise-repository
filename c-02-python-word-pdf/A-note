@@ -1,0 +1,5 @@
+sudo apt-get install pandoc
+sudo apt-get install texlive-latex-base
+sudo apt-get install texlive-fonts-recommended
+
+pandoc -o ./result/result.pdf -f docx ./result/result.docx

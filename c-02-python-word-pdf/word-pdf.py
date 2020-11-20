@@ -18,7 +18,7 @@ def merge():
 
   # Create the new word document
   wdoc = Document(template)
-  util.docx_replace(Document(template), re.compile(r'{{customername}}') , 'Paul Kempa')
+  util.docx_replace(wdoc, re.compile(r'{{customername}}') , r'Paul Kempa')
   wdoc.save(result_word_file)
 
   # Convert to PDF
