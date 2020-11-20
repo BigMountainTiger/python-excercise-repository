@@ -1,5 +1,9 @@
+Pandoc option --
 sudo apt-get install pandoc
 sudo apt-get install texlive-latex-base
 sudo apt-get install texlive-fonts-recommended
 
 pandoc -o ./result/result.pdf -f docx ./result/result.docx
+
+Abiword
+https://stackoverflow.com/questions/50982064/converting-docx-to-pdf-with-pure-python-on-linux-without-libreoffice
