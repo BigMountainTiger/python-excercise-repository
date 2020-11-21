@@ -1,4 +1,6 @@
 #!/bin/bash
 
+cd docker
+
 docker build -t experiment-1:0.0.1 .
 docker system prune -f
