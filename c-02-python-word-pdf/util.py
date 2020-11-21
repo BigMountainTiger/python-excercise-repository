@@ -1,6 +1,9 @@
+import time
+import datetime
 import os
 import glob
 import subprocess
+import boto3
 
 # clearDirectory
 def clearDirectory(directory):
@@ -31,3 +34,11 @@ def doc2pdf(word_file, result_path):
   p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
   p.wait()
   stdout, stderr = p.communicate()
+
+
+def upload2s3(bucket, result_pdf_file):
+  ts = datetime.datetime.fromtimestamp(time.time()).strftime(r'%Y-%m-%d-%H-%M-%S')
+  object_name = f'G-{ts}.pdf'
+
+  s3 = boto3.resource('s3')
+  s3.meta.client.upload_file(result_pdf_file, bucket, object_name)

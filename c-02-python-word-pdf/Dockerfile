@@ -10,10 +10,11 @@ RUN apt-get install -y abiword
 
 WORKDIR /app
 
-RUN mkdir result
-COPY template/* template/
 COPY reqirement.txt .
 RUN pip3 install -r reqirement.txt
+
+RUN mkdir result
+COPY template/* template/
 COPY util.py .
 COPY word-pdf.py .
 

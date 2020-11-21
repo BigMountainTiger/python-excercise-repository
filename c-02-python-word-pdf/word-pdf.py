@@ -10,8 +10,11 @@ def doc2pdf_linux(word_file):
 
 def merge():
   result_directory = './result/'
-  result_word_file = f'{result_directory}result.docx'
+  fileName = 'result'
+  result_word_file = f'{result_directory}{fileName}.docx'
+  result_pdf_file = f'{result_directory}{fileName}.pdf'
   template = './template/invoice-template.docx'
+  bucket = 'logs.huge.head.li'
 
   # Clear the result directory
   util.clearDirectory(result_directory)
@@ -23,6 +26,9 @@ def merge():
 
   # Convert to PDF
   util.doc2pdf(result_word_file, result_directory)
+
+  # Upload to S3
+  util.upload2s3(bucket, result_pdf_file)
 
   print('Completed')
 
