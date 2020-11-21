@@ -11,7 +11,7 @@ def doc2pdf_linux(word_file):
 def merge():
   result_directory = './result/'
   result_word_file = f'{result_directory}result.docx'
-  template = './template/demo-template.docx'
+  template = './template/invoice-template.docx'
 
   # Clear the result directory
   util.clearDirectory(result_directory)

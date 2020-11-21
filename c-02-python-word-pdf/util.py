@@ -26,7 +26,8 @@ def docx_replace(doc, regex, replace):
 
 # doc2pdf
 def doc2pdf(word_file, result_path):  
-  cmd = f'libreoffice --convert-to pdf {word_file} --outdir {result_path}'.split()
+  # cmd = f'libreoffice --convert-to pdf {word_file} --outdir {result_path}'.split()
+  cmd = f'abiword --to=pdf {word_file}'.split()
   p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
   p.wait()
   stdout, stderr = p.communicate()
