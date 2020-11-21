@@ -1,0 +1,12 @@
+#!/bin/bash
+
+task_raw=$(aws ecs run-task \
+  --task-definition FARGATETASKCDKSTACKFARGATETASKCDKSTACKFARGATE5599BAAB \
+  --launch-type FARGATE \
+  --cluster FARGATE-TASK-CDK-STACK-CLUSTER \
+  --network-configuration \
+    "awsvpcConfiguration={subnets=[subnet-0787c104626f0ac16,subnet-0ca6298b7ebe790a8],securityGroups=[sg-00bfe081c5db3a3ed],assignPublicIp=DISABLED}")
+
+taskArn=$(echo $task_raw | jq '.tasks[0].taskArn')
+
+echo -e "Task Started\n$taskArn"
