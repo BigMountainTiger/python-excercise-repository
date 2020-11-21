@@ -130,3 +130,9 @@ dmypy.json
 
 # Python virtual env
 environment-3.4/
+
+# AWS CDK
+node_modules
+.cdk.staging
+cdk.out
+.parcel-cache

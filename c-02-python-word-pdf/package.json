@@ -1,0 +1,9 @@
+{
+  "name": "c-02-python-word-pdf",
+  "version": "0.1.0",
+  "author": "Song Li",
+  "private": true,
+  "dependencies": {
+    "@aws-cdk/core": "1.74.0"
+  }
+}
