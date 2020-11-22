@@ -4,6 +4,8 @@ task_raw=$(aws ecs run-task \
   --task-definition C02PYTHONWORDPDFFARGATEStackC02PYTHONWORDPDFFARGATEStackFARGATEA1C3D208 \
   --launch-type FARGATE \
   --cluster C02-PYTHON-WORD-PDF-FARGATE-Stack-CLUSTER \
+  --overrides \
+    '{ "containerOverrides": [ { "name": "C02-PYTHON-WORD-PDF-FARGATE-Stack-CONTAINER", "environment": [ { "name": "REPLACEMENT", "value": "Song Li" }] } ] }' \
   --network-configuration \
     "awsvpcConfiguration={subnets=[subnet-036858aaddbf402c7,subnet-054e62a990450cb1a],securityGroups=[sg-0c164a9c96dda2a91],assignPublicIp=ENABLED}")
 
