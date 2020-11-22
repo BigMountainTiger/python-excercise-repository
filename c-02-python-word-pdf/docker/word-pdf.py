@@ -1,12 +1,7 @@
+import os
 import re
 from docx import Document
 import util
-
-def doc2pdf_linux(word_file):  
-    cmd = f'libreoffice --convert-to pdf {word_file} --outdir ./result/'.split()
-    p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-    p.wait(timeout=10)
-    stdout, stderr = p.communicate()
 
 def merge():
   result_directory = './result/'
@@ -15,13 +10,14 @@ def merge():
   result_pdf_file = f'{result_directory}{fileName}.pdf'
   template = './template/invoice-template.docx'
   bucket = 'logs.huge.head.li'
+  replacement = os.environ.get('REPLACEMENT', r'Paul Kempa')
 
   # Clear the result directory
   util.clearDirectory(result_directory)
 
   # Create the new word document
   wdoc = Document(template)
-  util.docx_replace(wdoc, re.compile(r'{{customername}}') , r'Paul Kempa')
+  util.docx_replace(wdoc, re.compile(r'{{customername}}') , replacement)
   wdoc.save(result_word_file)
 
   # Convert to PDF
