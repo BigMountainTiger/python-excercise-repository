@@ -3,6 +3,7 @@
 task_raw=$(aws ecs run-task \
   --task-definition C02PYTHONWORDPDFFARGATEStackC02PYTHONWORDPDFFARGATEStackFARGATEA1C3D208 \
   --launch-type FARGATE \
+  --platform-version 1.4.0 \
   --cluster C02-PYTHON-WORD-PDF-FARGATE-Stack-CLUSTER \
   --overrides \
     '{ "containerOverrides": [ { "name": "C02-PYTHON-WORD-PDF-FARGATE-Stack-CONTAINER", "environment": [ { "name": "REPLACEMENT", "value": "Song Li" }] } ] }' \
