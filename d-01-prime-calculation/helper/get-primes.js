@@ -1,9 +1,9 @@
 var fs = require('fs'),
 path = require('path'),    
-filePath = path.join(__dirname, 'primes.txt');
+inputFile = path.join(__dirname, 'primes.txt');
+outputFile = path.join(__dirname, 'primes_ouput.txt');
 
-console.log(filePath)
-fs.readFile(filePath, {encoding: 'utf-8'}, function(e, d){
+fs.readFile(inputFile, {encoding: 'utf-8'}, function(e, d){
   if (e) { console.log(e); return; }
 
   let i = 0;
@@ -16,5 +16,9 @@ fs.readFile(filePath, {encoding: 'utf-8'}, function(e, d){
 
   const result = result_rows.join(',\n');
 
-  console.log(result);
+  fs.writeFile(outputFile, result, (e) => {
+    if (e) { console.log(e); return; }
+
+    console.log('Done');
+  });
 });
