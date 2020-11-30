@@ -27,6 +27,9 @@ def docx_replace(doc, regex, replace):
       for cell in row.cells:
         docx_replace(cell, regex, replace)
 
+def docx_test_table(doc):
+  pass
+
 # doc2pdf
 def doc2pdf(word_file, result_path):  
   # cmd = f'libreoffice --convert-to pdf {word_file} --outdir {result_path}'.split()
