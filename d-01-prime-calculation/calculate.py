@@ -9,7 +9,7 @@ def calculate():
     if A % p == 0:
       result.append(p)
 
-    if len(result) == 4:
+    if len(result) == 6:
       break
 
   print(result)
