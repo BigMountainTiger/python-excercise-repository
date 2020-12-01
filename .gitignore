@@ -136,3 +136,5 @@ node_modules
 .cdk.staging
 cdk.out
 .parcel-cache
+
+primes.txt
