@@ -1,16 +1,19 @@
-# Prime numbers smaller than 1000
-from primes import primes
-
 A = pow(2016, 239) - 1
 result = []
 
 def calculate():
-  for p in primes: 
-    if A % p == 0:
-      result.append(p)
+  data = None
+  with open('primes.txt', 'r') as file:
+    data = file.read().split('\n');
 
+  for d in data:
     if len(result) == 6:
       break
+
+    for n in d.split('\t'):
+      p = int(n)
+      if A % p == 0:
+        result.append(p)
 
   print(result)
 
