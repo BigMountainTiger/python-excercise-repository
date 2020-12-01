@@ -19,9 +19,9 @@ def clearDirectory(directory):
     os.remove(f)
 
 # docx_replace
-def docx_replace(doc, regex, replace):
+def docx_replace(wdoc, regex, replace):
 
-  for p in doc.paragraphs:
+  for p in wdoc.paragraphs:
     if regex.search(p.text):
       inline = p.runs
       for i in range(len(inline)):
@@ -29,7 +29,7 @@ def docx_replace(doc, regex, replace):
           text = regex.sub(replace, inline[i].text)
           inline[i].text = text
 
-  for table in doc.tables:
+  for table in wdoc.tables:
     for row in table.rows:
       for cell in row.cells:
         docx_replace(cell, regex, replace)
