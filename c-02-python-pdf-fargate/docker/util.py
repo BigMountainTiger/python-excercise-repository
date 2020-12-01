@@ -52,11 +52,8 @@ def docx_fill_data(wdoc):
     cells[3].text = decimal_format.format(item['linetotal'])
 
     for x in range(4):
-      if (x == 1):
-        continue
-
-      cells[x].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
-
+      if (x != 1):
+        cells[x].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
   cells = table.add_row().cells
   cells[2].text = str('Total')
