@@ -25,7 +25,14 @@ def test():
   wdoc = Document(template_file)
   table = wdoc.tables[1]
   
-  items = []
+  items = [
+    {
+      'quantity': 12,
+      'description': 'Item description No.0',
+      'unitprice': 12000.3,
+      'linetotal': 20
+    }
+  ]
 
   for x in range(10):
     items.append({
@@ -36,12 +43,14 @@ def test():
     })
 
   # E7EEEE
+  int_format = '{:,.0f}'
+  decimal_format = '{:,.2f}'
   for item in items:
     cells = table.add_row().cells
-    cells[0].text = str(item['quantity'])
+    cells[0].text = int_format.format(item['quantity'])
     cells[1].text = str(item['description'])
-    cells[2].text = str(item['unitprice'])
-    cells[3].text = str(item['linetotal'])
+    cells[2].text = decimal_format.format(item['unitprice'])
+    cells[3].text = decimal_format.format(item['linetotal'])
 
     for x in range(4):
       if (x == 1):
@@ -54,7 +63,7 @@ def test():
   cells[0].text = ''
   cells[1].text = ''
   cells[2].text = str('Total')
-  cells[3].text = str(50000.00)
+  cells[3].text = decimal_format.format(50000.00)
 
   for x in range(4):
     cell = cells[x]
