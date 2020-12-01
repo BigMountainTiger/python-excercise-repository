@@ -7,7 +7,9 @@ import boto3
 from copy import deepcopy
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
+from docx.oxml.shared import OxmlElement, qn
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.shared import Pt
 
 import testdata
@@ -43,10 +45,20 @@ def docx_fill_data(wdoc):
 
   table = wdoc.tables[1]
 
+  def set_row_height(row):
+    tr = row._tr
+    trPr = tr.get_or_add_trPr()
+    trHeight = OxmlElement('w:trHeight')
+    trHeight.set(qn('w:val'), "250")
+    trHeight.set(qn('w:hRule'), "atLeast")
+    trPr.append(trHeight)
+
   int_format = '{:,}'
   decimal_format = '{:,.2f}'
   for item in items:
-    cells = table.add_row().cells
+    row = table.add_row()
+    set_row_height(row)
+    cells = row.cells
     cells[0].text = int_format.format(item['quantity'])
     cells[1].text = str(item['description'])
     cells[2].text = decimal_format.format(item['unitprice'])
@@ -56,10 +68,12 @@ def docx_fill_data(wdoc):
       if (x != 1):
         cells[x].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
+      cells[x].vertical_alignment = WD_ALIGN_VERTICAL.CENTER
       font = cells[x].paragraphs[0].runs[0].font
       font.size = Pt(8)
 
-  cells = table.add_row().cells
+  row = table.add_row()
+  cells = row.cells
   cells[2].text = str('Total')
   cells[3].text = decimal_format.format(total)
 
@@ -68,6 +82,7 @@ def docx_fill_data(wdoc):
     font = cell.paragraphs[0].runs[0].font
     font.bold = True
     font.size = Pt(8)
+    cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
   background = parse_xml(r'<w:shd {} w:fill="E7EEEE"/>'.format(nsdecls('w')))
