@@ -15,6 +15,7 @@ RUN pip3 install -r reqirement.txt
 
 RUN mkdir result
 COPY template/* template/
+COPY testdata.py .
 COPY util.py .
 COPY word-pdf.py .
 
