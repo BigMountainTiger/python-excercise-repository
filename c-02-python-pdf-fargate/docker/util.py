@@ -8,6 +8,7 @@ from copy import deepcopy
 from docx.oxml.ns import nsdecls
 from docx.oxml import parse_xml
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt
 
 import testdata
 
@@ -54,6 +55,9 @@ def docx_fill_data(wdoc):
     for x in range(4):
       if (x != 1):
         cells[x].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+      font = cells[x].paragraphs[0].runs[0].font
+      font.size = Pt(8)
 
   cells = table.add_row().cells
   cells[2].text = str('Total')
