@@ -65,7 +65,9 @@ def docx_fill_data(wdoc):
 
   for x in range(2, 4):
     cell = cells[x]
-    cell.paragraphs[0].runs[0].font.bold = True
+    font = cell.paragraphs[0].runs[0].font
+    font.bold = True
+    font.size = Pt(8)
     cell.paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
   background = parse_xml(r'<w:shd {} w:fill="E7EEEE"/>'.format(nsdecls('w')))
