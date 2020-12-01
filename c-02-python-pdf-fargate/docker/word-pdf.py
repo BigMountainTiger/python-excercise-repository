@@ -18,7 +18,7 @@ def merge():
   # Create the new word document
   wdoc = Document(template)
 
-  util.docx_test_table(wdoc)
+  util.docx_fill_data(wdoc)
 
   util.docx_replace(wdoc, re.compile(r'{{customername}}') , replacement)
   wdoc.save(result_word_file)
