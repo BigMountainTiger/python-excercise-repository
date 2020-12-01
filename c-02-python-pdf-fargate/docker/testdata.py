@@ -8,7 +8,7 @@ def get_test_data():
     }
   ]
 
-  for x in range(10):
+  for x in range(50):
     items.append({
       'quantity': 1290,
       'description': f'Item description No.{x}',

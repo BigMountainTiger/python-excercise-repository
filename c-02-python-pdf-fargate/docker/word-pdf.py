@@ -1,5 +1,6 @@
 import os
 import re
+import datetime
 from docx import Document
 import util
 
@@ -18,8 +19,9 @@ def merge():
   # Create the new word document
   wdoc = Document(template)
 
-  util.docx_replace(wdoc, re.compile(r'{{customername}}') , replacement)
-  util.docx_replace(wdoc, re.compile(r'{{companyname}}') , 'Baltimore Steel Factory')
+  util.docx_replace(wdoc, re.compile(r'{{customer-name}}') , replacement)
+  util.docx_replace(wdoc, re.compile(r'{{company-name}}') , 'Baltimore Steel Factory')
+  util.docx_replace(wdoc, re.compile(r'{{invoice-date}}') , datetime.date.today().strftime(r'%m/%d/%Y'))
   util.docx_fill_data(wdoc)
 
   wdoc.save(result_word_file)
