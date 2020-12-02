@@ -2,6 +2,7 @@ import os
 import re
 import datetime
 from docx import Document
+import json
 import util
 
 import testdata
@@ -15,6 +16,11 @@ def merge():
   bucket = 'logs.huge.head.li'
   replacement = os.environ.get('REPLACEMENT', r'Paul Kempa')
 
+  data = testdata.get_test_data()
+  # Experimenting the environment variable
+  json_data = os.environ.get('JSONDATA')
+  print(json_data)
+
   # Clear the result directory
   util.clearDirectory(result_directory)
 
@@ -24,8 +30,6 @@ def merge():
   util.docx_replace(wdoc, re.compile(r'{{customer-name}}') , replacement)
   util.docx_replace(wdoc, re.compile(r'{{company-name}}') , 'Baltimore Steel Factory')
   util.docx_replace(wdoc, re.compile(r'{{invoice-date}}') , datetime.date.today().strftime(r'%m/%d/%Y'))
-
-  data = testdata.get_test_data()
   util.docx_fill_data(wdoc, data)
 
   wdoc.save(result_word_file)
