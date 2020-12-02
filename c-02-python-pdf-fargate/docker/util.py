@@ -12,8 +12,6 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_ALIGN_VERTICAL
 from docx.shared import Pt
 
-import testdata
-
 # clearDirectory
 def clearDirectory(directory):
   files = glob.glob(f'{directory}*')
@@ -37,9 +35,8 @@ def docx_replace(wdoc, regex, replace):
         docx_replace(cell, regex, replace)
 
 # docx_fill_data
-def docx_fill_data(wdoc):
-
-  data = testdata.get_test_data()
+def docx_fill_data(wdoc, data):
+  
   items = data['items']
   total = data['total']
 

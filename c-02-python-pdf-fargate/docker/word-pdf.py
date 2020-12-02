@@ -4,6 +4,8 @@ import datetime
 from docx import Document
 import util
 
+import testdata
+
 def merge():
   result_directory = './result/'
   fileName = 'result'
@@ -22,7 +24,9 @@ def merge():
   util.docx_replace(wdoc, re.compile(r'{{customer-name}}') , replacement)
   util.docx_replace(wdoc, re.compile(r'{{company-name}}') , 'Baltimore Steel Factory')
   util.docx_replace(wdoc, re.compile(r'{{invoice-date}}') , datetime.date.today().strftime(r'%m/%d/%Y'))
-  util.docx_fill_data(wdoc)
+
+  data = testdata.get_test_data()
+  util.docx_fill_data(wdoc, data)
 
   wdoc.save(result_word_file)
 
@@ -30,7 +34,7 @@ def merge():
   util.doc2pdf(result_word_file, result_directory)
 
   # Upload to S3
-  util.upload2s3(bucket, result_pdf_file)
+  # util.upload2s3(bucket, result_pdf_file)
 
   print('Completed')
 
