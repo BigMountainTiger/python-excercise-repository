@@ -1,6 +1,6 @@
 #!/bin/bash
 
 cd docker
-cd implementation-1
+cd implementation-a
 
 python word-pdf.py

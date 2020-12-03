@@ -7,7 +7,7 @@ else
 fi
 
 cd docker
-cd implementation-1
+cd implementation-a
 
 repository=experiment-1
 
