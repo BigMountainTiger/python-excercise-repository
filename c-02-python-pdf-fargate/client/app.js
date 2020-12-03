@@ -1,12 +1,19 @@
+const fs = require('fs');
 const aws = require('aws-sdk');
 const lambda = new aws.Lambda({ region: 'us-east-1' });
 
 const lambda_name = 'WORD_2_PDF_LAMBDA';
 
 (async () => {
-  
+
+  const input_file = './files/result.docx';
+  const output_file = './files/result.pdf';
+
+  const input = fs.readFileSync(input_file);
+  const input_base64 = input.toString('base64');
+
   const payload = {
-    Payload: 'This is the payload'
+    Payload: input_base64
   };
 
   const result = await lambda.invoke({
@@ -14,7 +21,8 @@ const lambda_name = 'WORD_2_PDF_LAMBDA';
     Payload: JSON.stringify(payload)
   }).promise();
 
-  console.log(result);
+  const result_json = JSON.parse(result.Payload);
+  fs.writeFileSync(output_file, Buffer.from(result_json.Payload, 'base64'))
 
 })();
 
