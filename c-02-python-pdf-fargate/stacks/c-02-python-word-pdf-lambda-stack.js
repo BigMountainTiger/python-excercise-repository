@@ -20,11 +20,21 @@ class C02PythonWordPdfLambdaStack extends cdk.Stack {
       actions: ['logs:CreateLogGroup', 'logs:CreateLogStream', 'logs:PutLogEvents', 's3:GetObject', 's3:PutObject']
     }));
 
+    // https://github.com/aws/aws-lambda-dotnet/issues/516#issuecomment-675653204
+    const Gdip_LAYER_NAME = `${id}Gdip_LAYER_NAME`;
+    const layer = new lambda.LayerVersion(this, Gdip_LAYER_NAME, {
+      layerVersionName: Gdip_LAYER_NAME,
+      code: lambda.Code.fromAsset('./lambdas/layers/lib/'),
+      compatibleRuntimes: [lambda.Runtime.DOTNET_CORE_3_1],
+      description: 'A Layered Function Node_Module Layer'
+    });
+
     const LAMBDA_NAME = `WORD_2_PDF_LAMBDA`;
     new lambda.Function(this, LAMBDA_NAME, {
       runtime: lambda.Runtime.DOTNET_CORE_3_1,
       functionName: LAMBDA_NAME,
       description: LAMBDA_NAME,
+      layers: [layer],
       timeout: cdk.Duration.seconds(15),
       role: role,
       code: lambda.Code.fromAsset('./lambdas/word2pdf/bin/Debug/netcoreapp3.1/publish'),
