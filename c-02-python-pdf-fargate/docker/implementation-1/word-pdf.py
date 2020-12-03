@@ -38,7 +38,7 @@ def merge():
   util.doc2pdf(result_word_file, result_directory)
 
   # Upload to S3
-  # util.upload2s3(bucket, result_pdf_file)
+  util.upload2s3(bucket, result_pdf_file)
 
   print('Completed')
 
