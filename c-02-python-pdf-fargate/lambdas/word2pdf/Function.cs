@@ -31,7 +31,7 @@ namespace Word2pdf
 
     public async Task<LambdaPayload> FunctionHandler(LambdaPayload input, ILambdaContext context)
     {
-      System.Environment.SetEnvironmentVariable("FONTCONFIG_PATH", "/opt/lib/etc");
+      System.Environment.SetEnvironmentVariable("FONTCONFIG_PATH", "/opt/lib");
       var payload = await Task.Run(() => {
         return new LambdaPayload
         {

@@ -21,10 +21,10 @@ class C02PythonWordPdfLambdaStack extends cdk.Stack {
     }));
 
     // https://github.com/aws/aws-lambda-dotnet/issues/516#issuecomment-675653204
-    const Gdip_LAYER_NAME = `${id}Gdip_LAYER_NAME`;
+    const Gdip_LAYER_NAME = `${id}Gdip_LAYER`;
     const layer = new lambda.LayerVersion(this, Gdip_LAYER_NAME, {
       layerVersionName: Gdip_LAYER_NAME,
-      code: lambda.Code.fromAsset('./lambdas/layers/lib/'),
+      code: lambda.Code.fromAsset('./lambdas/layers'),
       compatibleRuntimes: [lambda.Runtime.DOTNET_CORE_3_1],
       description: 'A Layered Function Node_Module Layer'
     });
