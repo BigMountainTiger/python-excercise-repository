@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -n "$1" ]; then
+  tag=$1
+else
+  tag=0.0.1
+fi
+
+cd docker
+cd implementation-b
+
+repository=experiment-1
+
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 005256505030.dkr.ecr.us-east-1.amazonaws.com
+
+docker system prune -f
+docker build -t $repository:$tag -f Dockerfile .
+docker tag $repository:$tag 005256505030.dkr.ecr.us-east-1.amazonaws.com/$repository:$tag
+
+docker push 005256505030.dkr.ecr.us-east-1.amazonaws.com/$repository:$tag
+
+docker system prune -f
