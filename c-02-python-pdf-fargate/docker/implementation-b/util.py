@@ -93,9 +93,11 @@ def docx_fill_data(wdoc, data):
       cell._tc.get_or_add_tcPr().append(deepcopy(background))
 
 # doc2pdf
-def doc2pdf(word_file, result_path):  
+def doc2pdf(word_file, pdf_file):  
   # cmd = f'libreoffice --convert-to pdf {word_file} --outdir {result_path}'.split()
-  cmd = f'abiword --to=pdf {word_file}'.split()
+  # cmd = f'abiword --to=pdf {word_file}'.split()
+  # apt-get install -y libgdiplus
+  cmd = f'./word-pdf/publish/word-pdf {word_file} {pdf_file}'.split()
   p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
   p.wait()
   stdout, stderr = p.communicate()

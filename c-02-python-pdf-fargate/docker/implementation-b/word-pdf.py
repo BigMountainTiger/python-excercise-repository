@@ -35,7 +35,7 @@ def merge():
   wdoc.save(result_word_file)
 
   # Convert to PDF
-  util.doc2pdf(result_word_file, result_directory)
+  util.doc2pdf(result_word_file, result_pdf_file)
 
   # Upload to S3
   util.upload2s3(bucket, result_pdf_file)
