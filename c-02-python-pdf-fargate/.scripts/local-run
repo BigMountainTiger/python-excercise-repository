@@ -1,5 +1,6 @@
 #!/bin/bash
 
 # docker run --rm experiment-1:0.0.1
-docker run -v ~/.aws:/root/.aws:ro --rm experiment-1:0.0.1
-# docker run -v /home/song/Sandbox/python-examples/python-excercise-repository/c-02-python-word-pdf/result:/app/result:rw --rm experiment-1:0.0.1
+# docker run -v ~/.aws:/root/.aws:ro --rm experiment-1:0.0.1
+
+docker run -v ~/.aws:/root/.aws:ro -v /home/song/Sandbox/python-examples/python-excercise-repository/c-02-python-pdf-fargate/docker/implementation-b/result:/app/result:rw --rm experiment-1:0.0.1

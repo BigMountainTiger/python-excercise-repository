@@ -97,10 +97,14 @@ def doc2pdf(word_file, pdf_file):
   # cmd = f'libreoffice --convert-to pdf {word_file} --outdir {result_path}'.split()
   # cmd = f'abiword --to=pdf {word_file}'.split()
   # apt-get install -y libgdiplus
-  cmd = f'./word-pdf/publish/word-pdf {word_file} {pdf_file}'.split()
-  p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
-  p.wait()
-  stdout, stderr = p.communicate()
+  cmd = [f'word-pdf/publish/word-pdf']
+  print(cmd)
+  try:
+    p = subprocess.Popen(cmd, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    p.wait()
+    stdout, stderr = p.communicate()
+  except CalledProcessError as e:
+    print(e)
 
 # upload2s3
 def upload2s3(bucket, result_pdf_file):
