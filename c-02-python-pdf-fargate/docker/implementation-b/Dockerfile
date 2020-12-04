@@ -19,21 +19,21 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install -y libgdiplus
 RUN apt-get install -y dotnet-runtime-5.0
-# RUN apt-get install -y python3
-# RUN apt-get install -y python3-pip
+RUN apt-get install -y python3
+RUN apt-get install -y python3-pip
 
 WORKDIR /app
 
 RUN mkdir result
-COPY word-pdf/publish/* publish/
+ADD word-pdf/publish/ word-pdf/publish/
 
-# COPY reqirement.txt .
-# RUN pip3 install -r reqirement.txt
+COPY reqirement.txt .
+RUN pip3 install -r reqirement.txt
 
-# COPY template/* template/
-# COPY testdata.py .
-# COPY util.py .
-# COPY word-pdf.py .
+COPY template/* template/
+COPY testdata.py .
+COPY util.py .
+COPY word-pdf.py .
 
-ENTRYPOINT [ "./publish/word-pdf",  "" ]
+ENTRYPOINT [ "python3",  "word-pdf.py" ]
 CMD []
