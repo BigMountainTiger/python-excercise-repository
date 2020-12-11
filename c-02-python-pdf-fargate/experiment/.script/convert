@@ -1,0 +1,9 @@
+#!/bin/bash
+
+printf 'Converting\n'
+
+cd target-file
+
+libreoffice --convert-to pdf target.docx --outdir .
+
+printf 'Completed\n'
