@@ -25,6 +25,7 @@ def example_1():
   guess = [1, 1]
 
   result = opt.minimize(obj_fun, guess, method = 'SLSQP', bounds = C, constraints = cond)
+  # result = opt.minimize(obj_fun, guess, method = 'Nelder-Mead', bounds = C, constraints = cond)
 
   print(result)
   print(f'Result is {(result.x)[0]} - {(result.x)[1]}')
