@@ -2,5 +2,5 @@ pdfgrep - https://unix.stackexchange.com/questions/471266/bash-search-for-keywor
 pdftk - https://askubuntu.com/questions/221962/how-can-i-extract-a-page-range-a-part-of-a-pdf
 qpdf - https://en.wikipedia.org/wiki/QPDF
 
-pdfgrep -p "your search string" src/*.pdf
+pdfgrep -ip "your search string" src/*.pdf
 qpdf document-output.pdf --pages document-output.pdf 1-1 -- ./outfile.pdf
