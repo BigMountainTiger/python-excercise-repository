@@ -1,0 +1,37 @@
+pdfgrep - https://unix.stackexchange.com/questions/471266/bash-search-for-keywords-pdf-files-and-return-pages
+          https://www.ubuntuupdates.org/package/core/groovy/universe/base/pdfgrep
+
+pdftk - https://askubuntu.com/questions/221962/how-can-i-extract-a-page-range-a-part-of-a-pdf
+        https://linuxhint.com/install_pdftk_ubuntu/
+
+qpdf - https://en.wikipedia.org/wiki/QPDF
+
+qpdf document-output.pdf --pages document-output.pdf 1-1 -- ./outfile.pdf
+
+
+67104
+
+time pdfgrep -m 1 -ip "CCAA7106802" 161502_Merge.pdf
+time pdfgrep -m 1 --page-range=67103-67105 -ip "CCAA7106802" 161502_Merge.pdf
+
+pdfseparate is very fast
+time pdfseparate -f 47049 -l 47049 161502_Merge.pdf CCAA7106802.pdf
+
+http://manpages.ubuntu.com/manpages/bionic/man1/pdfseparate.1.html
+
+pdfinfo 161502_Merge.pdf
+
+
+pdfgrep -m 1 --page-range=1-10000 -ip "CCAA7106802" 161502_Merge.pdf &
+pdfgrep -m 1 --page-range=10001-20000 -ip "CCAA7106802" 161502_Merge.pdf &
+pdfgrep -m 1 --page-range=20001-30000 -ip "CCAA7106802" 161502_Merge.pdf &
+pdfgrep -m 1 --page-range=30001-40000 -ip "CCAA7106802" 161502_Merge.pdf &
+pdfgrep -m 1 --page-range=50001-60000 -ip "CCAA7106802" 161502_Merge.pdf &
+pdfgrep -m 1 --page-range=60001-70000 -ip "CCAA7106802" 161502_Merge.pdf &
+time wait
+
+
+
+
+
+

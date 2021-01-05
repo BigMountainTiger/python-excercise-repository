@@ -1,0 +1,31 @@
+#!/bin/bash
+
+cd pdf-files
+
+file=161502_Merge.pdf
+search_pattern="CCAA7106802"
+parallelism=2
+
+pdf_info=$(pdfinfo $file | grep Pages)
+page_info=(${pdf_info//:/})
+page_count=${page_info[1]}
+
+chunk_size=$(($page_count/$parallelism))
+residual=$(($page_count%$parallelism))
+
+for((i=0; i<$parallelism; i++))
+do
+  # eval "string to execute"
+  eval "pdfgrep -m 1 --page-range=$(($i*$chunk_size + 1))-$((($i + 1)*$chunk_size)) -ip '$search_pattern' $file &"
+done
+
+if [[ $residual -ne 0 ]]
+then
+  # eval "string to execute"
+  eval "pdfgrep -m 1 --page-range=$(($i*$chunk_size + 1))-$page_count -ip '$search_pattern' $file &"
+fi
+
+# echo "Started" &
+# time wait
+wait
+
