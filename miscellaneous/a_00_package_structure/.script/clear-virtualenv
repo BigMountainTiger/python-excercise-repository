@@ -1,0 +1,7 @@
+#!/bin/bash
+
+file=pip-requirement.txt
+
+pip freeze > ${file}
+pip uninstall -r ${file} -y
+rm ${file}

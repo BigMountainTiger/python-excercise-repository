@@ -18,3 +18,5 @@ python setup.py sdist bdist_wheel
 
 # Keep only the dist
 for i in "${d_ext[@]}"; do clear $i; done
+
+twine check dist/*
