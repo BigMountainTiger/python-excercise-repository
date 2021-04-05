@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# https://realpython.com/pypi-publish-python-package/
+
+function clear {
+  if [ -d $1 ]; then
+   rm -rf $1
+  fi
+} 
+
+declare -a d_all=('build' 'dist' 'mypack.egg-info')
+declare -a d_ext=('build' 'mypack.egg-info')
+
+for i in "${d_all[@]}"; do clear $i; done
+
+# Create the package
+python setup.py sdist bdist_wheel
+
+# Keep only the dist
+for i in "${d_ext[@]}"; do clear $i; done
