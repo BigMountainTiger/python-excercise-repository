@@ -128,9 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Python virtual env
-environment-3.4/
-
 # AWS CDK
 node_modules
 .cdk.staging
