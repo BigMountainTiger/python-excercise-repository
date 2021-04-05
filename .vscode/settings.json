@@ -5,6 +5,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "**/.virtual-env/env-3.8": true
+    "**/.virtual-env/env-3.8": true,
+    "**/__pycache__": true
   }
 }
