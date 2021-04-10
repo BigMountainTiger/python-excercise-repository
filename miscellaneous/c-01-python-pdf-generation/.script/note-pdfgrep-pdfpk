@@ -17,7 +17,11 @@ time pdfgrep -m 1 --page-range=67103-67105 -ip "CCAA7106802" 161502_Merge.pdf
 pdfseparate is very fast
 time pdfseparate -f 47049 -l 47049 161502_Merge.pdf CCAA7106802.pdf
 
+pdfseparate is part of poppler-utils package - https://en.wikipedia.org/wiki/Poppler_(software)
+apt-cache policy poppler-utils
+
 http://manpages.ubuntu.com/manpages/bionic/man1/pdfseparate.1.html
+
 
 pdfinfo 161502_Merge.pdf
 
