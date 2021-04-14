@@ -7,9 +7,11 @@ from torchvision.transforms import ToTensor, Lambda, Compose
 import matplotlib.pyplot as plt
 
 def quickstart():
-  data_directory = 'nn_data'
-  training_data = datasets.FashionMNIST(root=data_directory, train=True, download=True, transform=ToTensor())
-  test_data = datasets.FashionMNIST(root=data_directory, train=False, download=True, transform=ToTensor())
+  datadir = '../../nn_data'
+  modeldir = '../../nn_model'
+
+  training_data = datasets.FashionMNIST(root=datadir, train=True, download=True, transform=ToTensor())
+  test_data = datasets.FashionMNIST(root=datadir, train=False, download=True, transform=ToTensor())
 
   batch_size = 64
   train_dataloader = DataLoader(training_data, batch_size=batch_size)
@@ -85,10 +87,9 @@ def quickstart():
       train(train_dataloader, model, loss_fn, optimizer)
       test(test_dataloader, model)
 
-  modeldir = 'nn_model'
   if not os.path.exists(modeldir):
     os.makedirs(modeldir)
-  modelpath = f'{modeldir}/model.pth'
+  modelpath = f'{modeldir}/quickstart.pth'
 
   torch.save(model.state_dict(), modelpath)
   print(f'Saved PyTorch Model State to {modelpath}')

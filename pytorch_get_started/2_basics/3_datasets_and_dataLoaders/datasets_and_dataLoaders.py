@@ -9,9 +9,9 @@ import matplotlib.pyplot as plt
 def load_data():
   
   # Loading a Dataset
-  data_directory = 'nn_data'
-  training_data = datasets.FashionMNIST(root=data_directory, train=True, download=True, transform=ToTensor())
-  test_data = datasets.FashionMNIST(root=data_directory, train=False, download=True, transform=ToTensor())
+  datadir = '../../nn_data'
+  training_data = datasets.FashionMNIST(root=datadir, train=True, download=True, transform=ToTensor())
+  test_data = datasets.FashionMNIST(root=datadir, train=False, download=True, transform=ToTensor())
 
   # Iterating and Visualizing the Dataset
   labels_map = {
