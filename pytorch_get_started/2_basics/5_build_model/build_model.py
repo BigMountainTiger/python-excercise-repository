@@ -16,8 +16,6 @@ def build_model():
       self.linear_relu_stack = nn.Sequential(
         nn.Linear(2, 3),
         nn.ReLU(),
-        nn.Linear(3, 3),
-        nn.ReLU(),
         nn.Linear(3, 1),
         nn.ReLU()
       )
