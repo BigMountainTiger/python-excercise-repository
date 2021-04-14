@@ -135,3 +135,5 @@ cdk.out
 .parcel-cache
 
 primes.txt
+
+nn_data/
