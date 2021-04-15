@@ -48,5 +48,7 @@ def build_model_excercise():
   print(f'f(1,1) = {model(torch.Tensor([1.0, 1.0]))}')
 
 # This is re-written so get more excercise
+# How are optimizer.step() and loss.backward() related?
+# https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350
 if __name__ == '__main__':
   build_model_excercise()
