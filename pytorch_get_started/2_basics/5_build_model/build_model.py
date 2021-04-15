@@ -19,7 +19,7 @@ def build_model():
       self.linear_relu_stack = nn.Sequential(
         nn.Linear(2, 10),
         nn.ReLU(),
-        nn.Linear(10, 1),
+        nn.Linear(10, 1)
       )
 
     def forward(self, x):
@@ -56,7 +56,6 @@ def build_model():
       y_pred = model(minibatch_state_var)
       
       loss = loss_fn(y_pred, minibatch_label_var)
-      # print(i, batch_ind, loss.data[0])
 
       optimizer.zero_grad()
       loss.backward()
