@@ -31,8 +31,11 @@ def build_model_excercise():
   for i in range(epoch):
     
     for batch in range(4):
-      state_var = Variable(torch.Tensor(state))
-      label_var = Variable(torch.Tensor(label))
+      state_var = torch.Tensor(state)
+      label_var = torch.Tensor(label)
+
+      # state_var = Variable(torch.Tensor(state))
+      # label_var = Variable(torch.Tensor(label))
 
       pred = model(state_var)
       loss = loss_fn(pred, label_var)
@@ -42,10 +45,17 @@ def build_model_excercise():
       optimizer.step()
 
   print('Function after training:')
-  print(f'f(0,0) = {model(torch.Tensor([0.0, 0.0]))}')
-  print(f'f(0,1) = {model(torch.Tensor([0.0, 1.0]))}')
-  print(f'f(1,0) = {model(torch.Tensor([1.0, 0.0]))}')
-  print(f'f(1,1) = {model(torch.Tensor([1.0, 1.0]))}')
+  with torch.no_grad():
+    print(f'f(0,0) = {model(torch.Tensor([0.0, 0.0]))}')
+    print(f'f(0,1) = {model(torch.Tensor([0.0, 1.0]))}')
+    print(f'f(1,0) = {model(torch.Tensor([1.0, 0.0]))}')
+    print(f'f(1,1) = {model(torch.Tensor([1.0, 1.0]))}')
+
+    # Access tensor element by numpy
+    v = model(torch.Tensor([1.0, 0.0]))
+    print(v.numpy()[0])
+
+  print("f(1,1) = {}".format(model(Variable(torch.Tensor([1.0,1.0]).unsqueeze(0)))))
 
 # This is re-written so get more excercise
 # How are optimizer.step() and loss.backward() related?
