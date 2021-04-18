@@ -57,6 +57,19 @@ def build_model_excercise():
 
   print("f(1,1) = {}".format(model(Variable(torch.Tensor([1.0,1.0]).unsqueeze(0)))))
 
+  # https://pytorch.org/tutorials/beginner/saving_loading_models.html
+  print('Save the model')
+  modeldir = '../../nn_model'
+  path = f'{modeldir}/excercise.model'
+  torch.save(model, path)
+
+  print('Load the model')
+  loaded_model = torch.load(path)
+
+  print('Use the model')
+  with torch.no_grad():
+    print("f(1,1) = {}".format(loaded_model(torch.Tensor([1.0,1.0]))))
+
 # This is re-written so get more excercise
 # How are optimizer.step() and loss.backward() related?
 # https://discuss.pytorch.org/t/how-are-optimizer-step-and-loss-backward-related/7350
