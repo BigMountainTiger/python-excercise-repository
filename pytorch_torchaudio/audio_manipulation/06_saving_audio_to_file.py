@@ -70,5 +70,23 @@ def run():
   # File is removed after testing
   os.remove(path)
 
+  # Save to different format
+  formats = [
+    "mp3",
+    "flac",
+    "vorbis",
+    "sph",
+    "amb",
+    "amr-nb",
+    "gsm",
+  ]
+
+  for format in formats:
+    path = f"save_example.{format}"
+    torchaudio.save(path, waveform, sample_rate, format=format)
+    inspect_file(path)
+
+    os.remove(path)
+
 if __name__ == '__main__':
   run()
