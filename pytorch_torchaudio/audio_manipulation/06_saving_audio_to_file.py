@@ -88,5 +88,12 @@ def run():
 
     os.remove(path)
 
+  # Saving to Bytes buffer
+  buffer_ = io.BytesIO()
+  torchaudio.save(buffer_, waveform, sample_rate, format="wav")
+
+  buffer_.seek(0)
+  print(buffer_.read(16))
+
 if __name__ == '__main__':
   run()
