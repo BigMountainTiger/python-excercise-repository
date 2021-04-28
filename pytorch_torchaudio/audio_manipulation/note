@@ -1,2 +1,5 @@
 https://pytorch.org/tutorials/beginner/audio_preprocessing_tutorial.html#spectrogram
 
+Run the following so "simpleaudio" can be pip installed
+sudo apt-get install -y python3-dev libasound2-dev
+
