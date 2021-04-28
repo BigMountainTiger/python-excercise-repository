@@ -45,7 +45,17 @@ def querying_file_like_object():
 
   print_metadata(metadata, src=SAMPLE_MP3_URL)
 
+def test_my_file():
+  print()
+  print('Loading my file')
+
+  MY_WAV_PATH = os.path.join(_SAMPLE_DIR, "my-file.wav")
+  metadata = torchaudio.info(MY_WAV_PATH)
+  print_metadata(metadata)
+
 if __name__ == '__main__':
 
   quering_audio_metadata()
   querying_file_like_object()
+
+  test_my_file()
