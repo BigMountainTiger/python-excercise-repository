@@ -3,3 +3,8 @@ https://pytorch.org/tutorials/beginner/audio_preprocessing_tutorial.html#spectro
 Run the following so "simpleaudio" can be pip installed
 sudo apt-get install -y python3-dev libasound2-dev
 
+Use system python packages from a virtualenv
+vext - https://pypi.org/project/vext/
+vext.gi - https://pypi.org/project/vext.gi/
+
+
