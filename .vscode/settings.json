@@ -10,5 +10,6 @@
     "**/nn_data": true,
     "**/nn_model": true
   },
-  "python.pythonPath": ".virtual-env/env-3.8/bin/python"
+  "python.pythonPath": ".virtual-env/env-3.8/bin/python",
+  "jupyter.disableJupyterAutoStart": true
 }
