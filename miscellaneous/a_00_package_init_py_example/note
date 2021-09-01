@@ -1,0 +1,8 @@
+https://stackoverflow.com/questions/448271/what-is-init-py-for
+
+It is tested that the __init__.py file is no longer required in higher version of python
+
+1. The minimal unit of python import is a module - a ".py" file (Execute the file)
+2. Once imported, the full name is of module is "Package-name/directory-path-to-module/module-name" and can be accessed such way
+3. The as syntax can give a short name of the module
+4. In a package, the "__init__.py" is automatically executed, so anything imported in it no longer need to explicitly imported.
