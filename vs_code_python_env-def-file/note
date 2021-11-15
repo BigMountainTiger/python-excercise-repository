@@ -1,0 +1,8 @@
+For auto-complete:
+
+settings.json file
+---------------------------------------------------------
+
+"python.autoComplete.extraPaths": [
+    "${workspaceFolder}/vs_code_python_env-def-file/libs"
+]

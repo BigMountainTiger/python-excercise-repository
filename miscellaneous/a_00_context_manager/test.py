@@ -10,13 +10,22 @@ class parent():
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self.state = 'CLOSED'
+        self.__close__()
         print('exit method called')
+
+    def __close__(self):
+        print('Parent Close')
 
 
 class child(parent):
 
     def __init__(self):
         super().__init__()
+
+    # Although called in the parent class in the __exit__ function
+    # the child implementation is executed. 
+    def __close__(self):
+        print('Child Close')
 
     def print(self):
         print(self.state)
@@ -26,6 +35,10 @@ class child(parent):
 
 
 def test():
+
+    help(child)
+    # Method resolution order - https://www.python.org/download/releases/2.3/mro/
+    # Method override, so the child class __close__ method is called
     try:
         with child() as obj:
             obj.print()
