@@ -140,3 +140,4 @@ nn_data/
 nn_model/
 
 .virtual-env
+.env-3.9

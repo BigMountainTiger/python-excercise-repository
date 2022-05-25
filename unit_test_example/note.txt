@@ -1,0 +1,5 @@
+Run all the unit tests
+https://stackoverflow.com/questions/1732438/how-do-i-run-all-python-unit-tests-in-a-directory
+
+Patch relative
+https://stackoverflow.com/questions/14341689/how-to-mock-using-patch-relative-paths

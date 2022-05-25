@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export PYTHONPATH="."
+python test/mock_example_basic.py

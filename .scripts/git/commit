@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git reset --soft HEAD~
+git add-commit -m "Updated the python-excercise-repository"
+git push -f

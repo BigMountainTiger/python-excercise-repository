@@ -10,8 +10,10 @@
     "**/nn_data": true,
     "**/nn_model": true
   },
-  "python.pythonPath": ".virtual-env/env-3.8/bin/python3.8",
   "python.autoComplete.extraPaths": [
+    "${workspaceFolder}/vs_code_python_env-def-file/libs"
+  ],
+  "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ]
 }
