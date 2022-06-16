@@ -1,1 +1,56 @@
 asyncio is a built-in package
+
+Key words
+https://docs.python.org/3/library/asyncio.html
+https://docs.python.org/3/library/asyncio-task.html
+
+Coroutines
+    Coroutines declared with the async/await syntax is the preferred way of writing asyncio applications.
+
+Awaitables
+    Coroutines - refer to a coroutine function / a coroutine object
+    Tasks - Tasks are used to schedule coroutines concurrently
+    Futures - A Future is a special low-level awaitable object that represents an eventual result of an asynchronous operation.
+
+Running an asyncio Program
+    asyncio.run(coro, *, debug=False)
+    This function runs the passed coroutine, taking care of managing the asyncio event loop, finalizing asynchronous generators, and closing the threadpool
+    This function cannot be called when another asyncio event loop is running in the same thread
+
+Common asyncio functions
+    asyncio.create_task(coro, *, name=None)
+    coroutine asyncio.sleep(delay, result=None)
+    awaitable asyncio.gather(*aws, return_exceptions=False)
+    awaitable asyncio.shield(aw) - Protect an awaitable object from being cancelled
+    coroutine asyncio.wait_for(aw, timeout) - Wait for the aw awaitable to complete with a timeout
+    coroutine asyncio.wait(aws, *, timeout=None, return_when=ALL_COMPLETED) - Run awaitable objects in the aws iterable concurrently and block until the condition specified by return_when
+    asyncio.as_completed(aws, *, timeout=None) - Run awaitable objects in the aws iterable concurrently. Return an iterator of coroutines. Each coroutine returned can be awaited to get the earliest next result from the iterable of the remaining awaitables
+    coroutine asyncio.to_thread(func, /, *args, **kwargs) - Asynchronously run function func in a separate thread
+    asyncio.run_coroutine_threadsafe(coro, loop) - Submit a coroutine to the given event loop. Thread-safe
+    asyncio.current_task(loop=None) - Return the currently running Task instance, or None if no task is running
+    asyncio.all_tasks(loop=None) - Return a set of not yet finished Task objects run by the loop
+
+Task Object
+    class asyncio.Task(coro, *, loop=None, name=None) - A Future-like object that runs a Python coroutine. Not thread-safe
+    cancel(msg=None) - Request the Task to be cancelled
+    cancelled() - Return True if the Task is cancelled
+    done() - Return True if the Task is done
+    result() - Return the result of the Task
+    exception() - Return the exception of the Task.
+    add_done_callback(callback, *, context=None) - Add a callback to be run when the Task is done.
+    remove_done_callback(callback) - Remove callback from the callbacks list.
+    get_stack(*, limit=None) - Return the list of stack frames for this Task.
+    print_stack(*, limit=None, file=None) - Print the stack or traceback for this Task.
+    get_coro() - Return the coroutine object wrapped by the Task.
+    get_name() - Return the name of the Task.
+    set_name(value)
+
+Generator-based Coroutines - Support for generator-based coroutines is deprecated and is removed in Python 3.11
+    Generator-based coroutines predate async/await syntax
+
+aiohttp
+https://docs.aiohttp.org/en/stable/
+
+
+
+

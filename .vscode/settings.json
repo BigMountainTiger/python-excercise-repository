@@ -8,7 +8,8 @@
     "**/.virtual-env/*": true,
     "**/__pycache__": true,
     "**/nn_data": true,
-    "**/nn_model": true
+    "**/nn_model": true,
+    "**/.env-3.9": true,
   },
   "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
