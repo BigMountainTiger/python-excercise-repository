@@ -1,2 +1,7 @@
 https://fastapi.tiangolo.com/
 https://fastapi.tiangolo.com/#example
+
+Exceptions will not crash the uvicorn server
+
+AIOHTTP
+https://docs.aiohttp.org/en/stable/

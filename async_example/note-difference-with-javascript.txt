@@ -1,0 +1,6 @@
+javascript allows await a non-async function
+python does not allows await a non-async function, it is a run-time error
+
+In javascript, when encountering an await, it will run into the awaited function recursively for any synchronous code until the last await.
+In python, the awaited function (coroutine object) is put into the event loop as a whole
+    (calling the coroutine function returns a coroutine object without running the code at all)
