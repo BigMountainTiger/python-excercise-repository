@@ -1,0 +1,11 @@
+#!/bin/bash
+
+exclude=""
+exclude="${exclude},src/module_2.py"
+exclude="${exclude},src/module_3.py"
+
+coverage run -m --branch --source=src \
+    --omit=${exclude} \
+    pytest -W ignore::DeprecationWarning tests
+
+coverage xml -i

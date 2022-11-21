@@ -1,15 +1,16 @@
 {
   "files.exclude": {
     "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
     "**/.virtual-env/*": true,
     "**/__pycache__": true,
+    "**/*.egg-info": true,
     "**/nn_data": true,
     "**/nn_model": true,
     "**/.env-3.9": true,
+    "**/c-02-python-pdf-fargate/**/bin": true,
+    "**/c-02-python-pdf-fargate/**/obj": true,
+    "**/.pytest_cache": true,
+    "**/.coverage": true
   },
   "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"

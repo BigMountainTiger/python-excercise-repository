@@ -1,0 +1,10 @@
+https://pypi.org/project/coverage/
+
+
+pip install -U pytest
+pip install -U coverage
+
+python -m pytest -W ignore::DeprecationWarning tests
+
+coverage run -m --branch --source=src pytest -W ignore::DeprecationWarning tests
+coverage xml -i
