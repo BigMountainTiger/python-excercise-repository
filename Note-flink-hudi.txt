@@ -1,5 +1,277 @@
-AKIA5VR552_________________JXN2FW5U7E
-AuyxaQ/meaLxMUC3Pz______________BoQMfYJF3EtpGA66WO3prc
+-----------------------------------------------------------------------
+Simple streaming
+
+package example.song.com;
+
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.connector.kafka.source.KafkaSource;
+import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+public class StreamingJob_kafka {
+
+	public static void main(String[] args) throws Exception {
+
+		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+		KafkaSource<String> kafaka = kafaka();
+		DataStream<String> stm = env.fromSource(kafaka, WatermarkStrategy.noWatermarks(), "Kafka Source");
+
+		DataStream<String> stm1 = stm.map(new MapFunction<String, String>() {
+			@Override
+			public String map(String value) {
+				return "Mapped - " + value;
+			}
+		});
+
+		stm1.print();
+
+		System.out.println("Start execution");
+		env.execute("Flink Streaming Java API Skeleton");
+	}
+
+	private static KafkaSource<String> kafaka() {
+		String topic = "song";
+		String brokers = "localhost:29092";
+
+		KafkaSource<String> source = KafkaSource.<String>builder()
+				.setBootstrapServers(brokers)
+				.setTopics(topic)
+				.setStartingOffsets(OffsetsInitializer.latest())
+				.setValueOnlyDeserializer(new SimpleStringSchema())
+				.build();
+
+		return source;
+	}
+
+}
+
+
+
+-----------------------------------------------------------------------
+Kafka
+
+package example.song.com;
+
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.connector.kafka.source.KafkaSource;
+import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+
+public class StreamingJob_kafka {
+
+	public static void main(String[] args) throws Exception {
+
+		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+		KafkaSource<String> kafaka = kafaka();
+		DataStream<String> stm = env.fromSource(kafaka, WatermarkStrategy.noWatermarks(), "Kafka Source");
+
+		DataStream<String> stm1 = stm.map(new MapFunction<String, String>() {
+			@Override
+			public String map(String value) {
+				return "Mapped - " + value;
+			}
+		});
+
+		stm1.print();
+
+		System.out.println("Start execution");
+		env.execute("Flink Streaming Java API Skeleton");
+	}
+
+	private static KafkaSource<String> kafaka() {
+		String topic = "song";
+		String brokers = "localhost:29092";
+
+		KafkaSource<String> source = KafkaSource.<String>builder()
+				.setBootstrapServers(brokers)
+				.setTopics(topic)
+				.setStartingOffsets(OffsetsInitializer.latest())
+				.setValueOnlyDeserializer(new SimpleStringSchema())
+				.build();
+
+		return source;
+	}
+
+}
+
+
+
+-----------------------------------------------------------------------
+Test
+
+package example.song.com;
+
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.data.RowData;
+import org.apache.hudi.configuration.FlinkOptions;
+import org.apache.hudi.util.HoodiePipeline;
+
+public class DataStreamJob_Hudi_read {
+
+	public static void main(String[] args) throws Exception {
+		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+		String test_name = "hudi";
+		final String input = MessageFormat.format("/home/song/Sandbox/flink-example/sink-example/test-files/{0}/output",
+				new Object[] { test_name });
+
+		String targetTable = "t1";
+		String basePath = input;
+
+		Map<String, String> options = new HashMap<>();
+		options.put(FlinkOptions.PATH.key(), basePath);
+
+		HoodiePipeline.Builder builder = HoodiePipeline.builder(targetTable)
+				.column("id INT")
+				.column("name VARCHAR(100)")
+				.pk("id")
+				.options(options);
+
+		DataStream<RowData> rowDataDataStream = builder.source(env);
+		rowDataDataStream.print();
+
+		System.out.println("Start execution");
+		env.execute("Flink Streaming");
+
+	}
+}
+
+
+
+------------------------------------------------------------------------
+Read
+
+package example.song.com;
+
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.data.RowData;
+import org.apache.hudi.configuration.FlinkOptions;
+import org.apache.hudi.util.HoodiePipeline;
+
+public class DataStreamJob_Hudi_read {
+
+	public static void main(String[] args) throws Exception {
+		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+		String test_name = "hudi";
+		final String input = MessageFormat.format("/home/song/Sandbox/flink-example/sink-example/test-files/{0}/output",
+				new Object[] { test_name });
+
+		String targetTable = "t1";
+		String basePath = input;
+
+		Map<String, String> options = new HashMap<>();
+		options.put(FlinkOptions.PATH.key(), basePath);
+
+		HoodiePipeline.Builder builder = HoodiePipeline.builder(targetTable)
+				.column("id INT")
+				.column("name VARCHAR(100)")
+				.pk("id")
+				.options(options);
+
+		DataStream<RowData> rowDataDataStream = builder.source(env);
+		rowDataDataStream.print();
+
+		System.out.println("Start execution");
+		env.execute("Flink Streaming");
+
+	}
+}
+
+
+-------------------------------------------------------------------------
+Write...
+
+package example.song.com;
+
+import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.connector.file.src.FileSource;
+import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
+import org.apache.flink.core.fs.Path;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.data.GenericRowData;
+import org.apache.flink.table.data.RowData;
+import org.apache.flink.table.data.StringData;
+import org.apache.hudi.configuration.FlinkOptions;
+import org.apache.hudi.util.HoodiePipeline;
+import org.json.JSONObject;
+
+public class DataStreamJob_Hudi {
+
+	public static void main(String[] args) throws Exception {
+		final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+
+		String test_name = "hudi";
+		final String input = MessageFormat.format("./test-files/{0}/input", new Object[] { test_name });
+		final String output = MessageFormat.format("/home/song/Sandbox/flink-example/sink-example/test-files/{0}/output", new Object[] { test_name });
+
+		// FileUtils.deleteDirectory(new File(output));
+
+		final FileSource<String> source = FileSource
+				.forRecordStreamFormat(new TextLineInputFormat(), new Path(input))
+				.build();
+
+		final DataStream<String> stm = env.fromSource(source, WatermarkStrategy.noWatermarks(), "file-source");
+		final DataStream<RowData> stm1 = stm.map(new MapFunction<String, RowData>() {
+			@Override
+			public RowData map(String value) {
+				GenericRowData data = new GenericRowData(2);
+				JSONObject o = new JSONObject(value);
+
+				data.setField(0, o.getInt("id"));
+				data.setField(1, StringData.fromString(o.getString("name")));
+
+				return (RowData) data;
+			}
+		});
+
+		stm1.print();
+
+		String targetTable = "t1";
+		String basePath = output;
+
+		Map<String, String> options = new HashMap<>();
+		options.put(FlinkOptions.PATH.key(), basePath);
+
+		HoodiePipeline.Builder builder = HoodiePipeline.builder(targetTable)
+				.column("id INT")
+				.column("name VARCHAR(100)")
+				.pk("id")
+				// .partition("partition")
+				.options(options);
+
+		builder.sink(stm1, true);
+
+		System.out.println("Start execution");
+		env.execute("Flink Streaming");
+
+	}
+}
+
 
 --------------------------------------------------------------------------------------
 
