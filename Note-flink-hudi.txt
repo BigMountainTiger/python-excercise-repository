@@ -1,3 +1,174 @@
+https://concourse-ci.org/docs.html
+
+-----------------------------
+version: '3'
+
+services:
+  concourse-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_PASSWORD: concourse_pass
+      POSTGRES_USER: concourse_user
+      PGDATA: /database
+
+  concourse:
+    image: concourse/concourse
+    command: quickstart
+    privileged: true
+    depends_on: [concourse-db]
+    ports: ["8080:8080"]
+    environment:
+      CONCOURSE_POSTGRES_HOST: concourse-db
+      CONCOURSE_POSTGRES_USER: concourse_user
+      CONCOURSE_POSTGRES_PASSWORD: concourse_pass
+      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_ADD_LOCAL_USER: test:test
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: test
+      # instead of relying on the default "detect"
+      CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
+      CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
+      CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
+      CONCOURSE_X_FRAME_OPTIONS: allow
+      CONCOURSE_CONTENT_SECURITY_POLICY: "*"
+      CONCOURSE_CLUSTER_NAME: tutorial
+      CONCOURSE_WORKER_CONTAINERD_DNS_SERVER: "8.8.8.8"
+      CONCOURSE_WORKER_RUNTIME: "containerd"
+
+
+-----------------------------
+#!/bin/bash
+
+cd .scripts/server
+pwd
+
+docker-compose up -d
+
+echo "Wait for 10 seconds, so the server is ready"
+sleep 10
+
+echo "Log in to the concourse server"
+fly -t tutorial login -c http://localhost:8080 -u test -p test
+
+------------------------------
+#!/bin/bash
+
+cd .scripts/server
+pwd
+
+docker-compose down
+
+-------------------------------
+
+jobs:
+  - name: hello-world-job
+    plan:
+      - task: step-1
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: busybox
+          outputs:
+            - name: the-artifact-1
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                ls -l .
+                echo "hello from step-1" > the-artifact-1/message
+      - task: step-2
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: busybox
+          outputs:
+            - name: the-artifact-2
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                ls -l .
+                echo "hello from step-2" > the-artifact-2/message
+      - task: read-the-artifact-1
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: busybox
+          inputs:
+            - name: the-artifact-1
+            - name: the-artifact-2
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                echo "From read-the-artifact-1"
+                ls -l .
+                cat the-artifact-1/message
+                cat the-artifact-2/message
+      - task: read-the-artifact-2
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: busybox
+          inputs:
+            - name: the-artifact-1
+            - name: the-artifact-2
+          run:
+            path: sh
+            args:
+              - -cx
+              - |
+                echo "From read-the-artifact-2"
+                ls -l .
+                cat the-artifact-1/message
+                cat the-artifact-2/message
+
+  - name: another-job
+    plan:
+      - task: step-1
+        config:
+          platform: linux
+          image_resource:
+            type: registry-image
+            source:
+              repository: busybox
+          outputs:
+            - name: the-artifact-1
+          run:
+            path: echo
+            args: ["From another job"]
+	    
+---------------------------------------------------
+
+#!/bin/bash
+
+cd pipelines/hello-world/
+pwd
+
+fly -t tutorial set-pipeline -p hello-world -c hello-world.yml -n
+fly -t tutorial unpause-pipeline -p hello-world
+
+----------------------------------------------------
+
+#!/bin/bash
+
+fly -t tutorial trigger-job --job hello-world/hello-world-job --watch
+fly -t tutorial trigger-job --job hello-world/another-job --watch
+
+------------------------------------------------------
+
 -----------------------------------------------------------------------
 
 package com.song.examples.kafkaconfluent;
