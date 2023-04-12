@@ -1,6 +1,35 @@
 https://github.com/saubury/kafka-connect-oracle-cdc
 https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc
 
+-------------------------------------------
+{
+  "name": "name",
+  "config": {
+    "connector.class": "",
+    "key.converter": "",
+    "value.converter": "",
+    "errors.retry.timeout": "1",
+    "tasks.max":"1",
+    "mode": "incrementing",
+    "incrementing.column.name": "DATE",
+    "topic.prefix": "",
+    "connection.url": "",
+    "connection.user": "",
+    "connection.password": "",
+    "catalog.pattern": "",
+    "schema.pattern": "",
+    "query": "select * from TABLE",
+    "validate.non.null": "true",
+    "numeric.mapping": "best_fit",
+    "poll.interval.ms": "1000",
+    "producer.interceptor.classes": "",
+    "value.converter.schema.registry.url": "",
+    "value.converter.schemas.enable": "true",
+    "key.converter.schema.registry.url": "",
+    "key.converter.schemas.enable": "true"
+  }
+}
+
 --------------------------------------
 https://concourse-ci.org/docs.html
 
