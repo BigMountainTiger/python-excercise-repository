@@ -1,4 +1,5 @@
 https://github.com/saubury/kafka-connect-oracle-cdc
+https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc
 
 --------------------------------------
 https://concourse-ci.org/docs.html
