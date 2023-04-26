@@ -1,3 +1,30 @@
+.scripts
+
+commands
+
+connector
+
+update
+#!/bin/bash
+
+
+cd .scripts/environments/${NAME}/
+pwd
+
+echo ${CONNECTOR_NAME}
+URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/config"
+
+curl -i -X PUT -H "Content-Type:application/json" ${URL} --data "@config.json"
+
+echo
+
+-------------------------------
+
+kafka
+
+schema-registry
+
+
 https://github.com/saubury/kafka-connect-oracle-cdc
 https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc
 
