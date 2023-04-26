@@ -1,6 +1,56 @@
 #!/bin/bash
 
-curl -s -X GET -H 'Content-Type: application/json' http://localhost:8083/connector-plugins
+echo ${CONNECTOR_NAME}
+
+URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/"
+
+curl -i -X DELETE ${URL}
+
+>
+
+#!/bin/bash
+
+echo ${CONNECTOR_NAME}
+
+URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/pause"
+curl -i -X PUT -H "Accept:application/json" ${URL} 
+
+echo
+
+
+>
+
+#!/bin/bash
+
+
+echo ${CONNECTOR_NAME}
+
+URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/resume"
+curl -i -X PUT -H "Accept:application/json" ${URL} 
+
+echo
+
+>
+
+#!/bin/bash
+
+echo ${CONNECTOR_NAME}
+curl -s -X GET -H 'Content-Type: application/json' http://localhost:8083/connectors/${CONNECTOR_NAME}/status
+
+echo
+
+>
+
+#!/bin/bash
+
+
+cd .scripts/environments/${NAME}/
+pwd
+
+echo ${CONNECTOR_NAME}
+URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/config"
+
+curl -i -X PUT -H "Content-Type:application/json" ${URL} --data "@config.json"
 
 echo
 
