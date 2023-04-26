@@ -1,56 +1,33 @@
 #!/bin/bash
 
-echo ${CONNECTOR_NAME}
-
-URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/"
-
-curl -i -X DELETE ${URL}
-
->
-
-#!/bin/bash
-
-echo ${CONNECTOR_NAME}
-
-URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/pause"
-curl -i -X PUT -H "Accept:application/json" ${URL} 
+SERVER="localhost:29092"
 
 echo
-
-
+echo "Listening to the topic ${TOPIC_NAME}"
+kafka-console-consumer.bat \
+    --bootstrap-server ${SERVER} \
+    --topic ${TOPIC_NAME} \
+    --from-beginning
+    
 >
 
 #!/bin/bash
 
+SERVER="localhost:29092"
+echo
+echo "Deleting the topic - ${TOPIC_NAME}"
 
-echo ${CONNECTOR_NAME}
-
-URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/resume"
-curl -i -X PUT -H "Accept:application/json" ${URL} 
-
+kafka-topics.bat --bootstrap-server ${SERVER} --delete --topic ${TOPIC_NAME}
 echo
 
 >
 
 #!/bin/bash
 
-echo ${CONNECTOR_NAME}
-curl -s -X GET -H 'Content-Type: application/json' http://localhost:8083/connectors/${CONNECTOR_NAME}/status
+SERVER="localhost:29092"
 
-echo
-
->
-
-#!/bin/bash
-
-
-cd .scripts/environments/${NAME}/
-pwd
-
-echo ${CONNECTOR_NAME}
-URL="127.0.0.1:8083/connectors/${CONNECTOR_NAME}/config"
-
-curl -i -X PUT -H "Content-Type:application/json" ${URL} --data "@config.json"
+echo "Listing the topics"
+kafka-topics.bat --bootstrap-server=${SERVER} --list
 
 echo
 
