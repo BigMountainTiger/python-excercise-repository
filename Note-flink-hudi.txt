@@ -1,11 +1,32 @@
-#!/bin/bash
+{
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "errors.retry.timeout": "1",
+    "tasks.max": "1",
+    "mode": "timestamp",
+    "timestamp.column.name": "updated",
+    "topic.prefix": "example_postgres_topic",
+    "connection.url": "jdbc:postgresql://host.docker.internal:5432/postgres",
+    "connection.user": "postgres",
+    "connection.password": "docker",
+    "query": "SELECT ID, NAME, updated FROM public.STUDENT",
+    "validate.non.null": "true",
+    "numeric.mapping": "best_fit",
+    "poll.interval.ms": "10000",
+    "timestamp.initial": 1
+  }
+  
+  >
+  
+  #!/bin/bash
 
-# https://docs.confluent.io/platform/current/schema-registry/develop/using.html
+export NAME="postgres"
 
-URL="http://localhost:8082"
-curl -X GET ${URL}/subjects
+export CONNECTOR_NAME="${NAME}-connector"
+export TOPIC_NAME="example_postgres_topic"
 
-echo
+echo "Name => ${NAME}"
+echo "Connector Name => ${CONNECTOR_NAME}"
+echo "Topic Name => ${TOPIC_NAME}"
 
 --------------------------------------------------------------------------------
 .scripts
