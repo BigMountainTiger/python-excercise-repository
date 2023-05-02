@@ -1,3 +1,93 @@
+var fields = Consume_Data.schema.getFields();
+		var size = fields.size();
+		final var list = new ArrayList<RowType.RowField>(size);
+
+		for (int i = 0; i < size; i++) {
+			var field = fields.get(i);
+			var schema = field.schema();
+
+			var logicalType = schema.getLogicalType();
+			var type = (logicalType == null) ? schema.getType().name(): logicalType.getName();
+			list.add(new RowType.RowField(field.name(), TypeMapping.avroNullableSchemaTypeMapping.get(type)));
+		}
+
+		var converter = AvroToRowDataConverters.createRowConverter(new RowType(list));
+		var stm_data = stm.map(r -> {
+			return (RowData) converter.convert(r);
+		});
+
+		stm_data.print();
+
+ ---------------------------------------------------------------------
+ 
+ private static final String STRING = "STRING";
+    private static final String BYTES = "BYTES";
+    private static final String INT = "INT";
+    private static final String LONG = "LONG";
+    private static final String FLOAT = "FLOAT";
+    private static final String DOUBLE = "DOUBLE";
+    private static final String BOOLEAN = "BOOLEAN";
+    private static final String DATE = "DATE";
+    private static final String TIMESTAMP_MILLIS = "timestamp-millis";
+    private static final String TIMESTAMP_MICROS = "timestamp-micros";
+    private static final String NULL = "null";
+
+    protected static final Map<String, LogicalType> avroSchemaTypeMapping = initAvroTypeMap();
+    protected static final Map<String, LogicalType> avroNullableSchemaTypeMapping = initAvroNullableTypeMap();
+    protected static final Map<String, String> hudiDataTypeMapping = initHudiDataTypeMap();
+
+    private TypeMapping() {
+    }
+
+    private static HashMap<String, LogicalType> initAvroTypeMap() {
+        HashMap<String, LogicalType> schemaTypeMapping = new HashMap<>();
+        schemaTypeMapping.put(STRING, new VarCharType(false, VarCharType.MAX_LENGTH));
+        schemaTypeMapping.put(BYTES, new BinaryType(false, BinaryType.MAX_LENGTH));
+        schemaTypeMapping.put(INT, new IntType(false));
+        schemaTypeMapping.put(LONG, new BigIntType(false));
+        schemaTypeMapping.put(FLOAT, new FloatType(false));
+        schemaTypeMapping.put(DOUBLE, new DoubleType(false));
+        schemaTypeMapping.put(BOOLEAN, new BooleanType(false));
+        schemaTypeMapping.put(DATE, new DateType(false));
+        schemaTypeMapping.put(TIMESTAMP_MILLIS, new TimestampType(false, TimestampType.DEFAULT_PRECISION));
+        schemaTypeMapping.put(TIMESTAMP_MICROS, new TimestampType(false, TimestampType.DEFAULT_PRECISION));
+        schemaTypeMapping.put(NULL, new NullType());
+        return schemaTypeMapping;
+    }
+
+    private static HashMap<String, LogicalType> initAvroNullableTypeMap() {
+        HashMap<String, LogicalType> nullableSchemaTypeMapping = new HashMap<>();
+        nullableSchemaTypeMapping.put(STRING, new VarCharType(VarCharType.MAX_LENGTH));
+        nullableSchemaTypeMapping.put(BYTES, new BinaryType());
+        nullableSchemaTypeMapping.put(INT, new IntType());
+        nullableSchemaTypeMapping.put(LONG, new BigIntType());
+        nullableSchemaTypeMapping.put(FLOAT, new FloatType());
+        nullableSchemaTypeMapping.put(DOUBLE, new DoubleType());
+        nullableSchemaTypeMapping.put(BOOLEAN, new BooleanType());
+        nullableSchemaTypeMapping.put(DATE, new DateType());
+        nullableSchemaTypeMapping.put(TIMESTAMP_MILLIS, new TimestampType());
+        nullableSchemaTypeMapping.put(TIMESTAMP_MICROS, new TimestampType());
+        nullableSchemaTypeMapping.put(NULL, new NullType());
+        return nullableSchemaTypeMapping;
+    }
+
+    private static HashMap<String, String> initHudiDataTypeMap() {
+        HashMap<String, String> hudiDataTypeMapping = new HashMap<>();
+        hudiDataTypeMapping.put(STRING, "STRING");
+        hudiDataTypeMapping.put(BYTES, "BYTES");
+        hudiDataTypeMapping.put(INT, "INT");
+        hudiDataTypeMapping.put(LONG, "BIGINT");
+        hudiDataTypeMapping.put(FLOAT, "FLOAT");
+        hudiDataTypeMapping.put(DOUBLE, "DOUBLE");
+        hudiDataTypeMapping.put(BOOLEAN, "BOOLEAN");
+        hudiDataTypeMapping.put(DATE, "DATE");
+        hudiDataTypeMapping.put(TIMESTAMP_MILLIS, "TIMESTAMP");
+        hudiDataTypeMapping.put(TIMESTAMP_MICROS, "TIMESTAMP(3)");
+        return hudiDataTypeMapping;
+    }
+    
+------------------------------------------------
+
 {
     "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
     "errors.retry.timeout": "1",
