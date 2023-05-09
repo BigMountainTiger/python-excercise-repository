@@ -1,3 +1,220 @@
+package com.song.example;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericRecord;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
+import org.apache.flink.api.java.utils.ParameterTool;
+import org.apache.flink.connector.kafka.source.KafkaSource;
+import org.apache.flink.connector.kafka.source.enumerator.initializer.OffsetsInitializer;
+import org.apache.flink.formats.avro.AvroToRowDataConverters;
+import org.apache.flink.formats.avro.registry.confluent.ConfluentRegistryAvroDeserializationSchema;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.data.RowData;
+import org.apache.flink.table.types.logical.RowType;
+
+import com.song.example.sr.SchemaRegistry;
+
+public class Map_Data {
+
+	private static Schema schema;
+
+	@SuppressWarnings("unchecked")
+	public static void main(String[] args) throws Exception {
+		ParameterTool parameter = ParameterTool.fromArgs(args);
+
+		Map_Data.load_schema(parameter);
+		var maps = TypeMapping.MapAvro(Map_Data.schema);
+		var avro_list = (List<RowType.RowField>) maps.get("AVRO");
+		var hudi_list = (List<String>) maps.get("HUDI");
+		var converter = AvroToRowDataConverters.createRowConverter(new RowType(avro_list));
+
+		System.out.println(hudi_list);
+		System.out.println();
+
+		final var env = StreamExecutionEnvironment.getExecutionEnvironment();
+		var kafka = kafaka(parameter);
+		var stm = env.fromSource(kafka, WatermarkStrategy.noWatermarks(), "Kafka Source");
+
+		var stm_data = stm.map(r -> {
+			return (RowData) converter.convert(r);
+		});
+
+		stm_data.print();
+
+		System.out.println();
+		env.execute("Flink started");
+	}
+
+	private static KafkaSource<GenericRecord> kafaka(ParameterTool parameter) throws IOException {
+
+		String SCHEMA_REGISTRY_URL = parameter.get("schema-registry");
+		String SERVER = parameter.get("bootstrp-server");
+		String TOPIC = parameter.get("topic");
+		String GROUP_ID = "TEST_GROUP_EXAMPLE";
+
+		var schema = Map_Data.schema;
+
+		KafkaSource<GenericRecord> source = KafkaSource.<GenericRecord>builder()
+				.setTopics(TOPIC)
+				.setGroupId(GROUP_ID)
+				.setProperty("bootstrap.servers", SERVER)
+				.setStartingOffsets(OffsetsInitializer.earliest())
+				.setBounded(OffsetsInitializer.latest())
+				.setValueOnlyDeserializer(
+						ConfluentRegistryAvroDeserializationSchema.forGeneric(schema, SCHEMA_REGISTRY_URL))
+				.build();
+
+		return source;
+	}
+
+	private static void load_schema(ParameterTool parameter) throws IOException {
+
+		String SCHEMA_REGISTRY_URL = parameter.get("schema-registry");
+		String TOPIC = parameter.get("topic");
+
+		var sr = new SchemaRegistry(SCHEMA_REGISTRY_URL, TOPIC + "-value");
+		var schema = sr.LoadSchema();
+
+		Map_Data.schema = schema;
+	}
+}
+
+---------------------------------------------------------------------------
+
+package com.song.example;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import org.apache.avro.Schema;
+import org.apache.avro.Schema.Field;
+import org.apache.flink.table.types.logical.BigIntType;
+import org.apache.flink.table.types.logical.BinaryType;
+import org.apache.flink.table.types.logical.BooleanType;
+import org.apache.flink.table.types.logical.DateType;
+import org.apache.flink.table.types.logical.DoubleType;
+import org.apache.flink.table.types.logical.FloatType;
+import org.apache.flink.table.types.logical.IntType;
+import org.apache.flink.table.types.logical.LogicalType;
+import org.apache.flink.table.types.logical.NullType;
+import org.apache.flink.table.types.logical.RowType;
+import org.apache.flink.table.types.logical.TimestampType;
+import org.apache.flink.table.types.logical.VarCharType;
+
+public class TypeMapping {
+
+    private static final String STRING = "string";
+    private static final String BYTES = "bytes";
+    private static final String INT = "int";
+    private static final String LONG = "long";
+    private static final String FLOAT = "float";
+    private static final String DOUBLE = "double";
+    private static final String BOOLEAN = "boolean";
+    private static final String DATE = "date";
+    private static final String TIMESTAMP_MILLIS = "timestamp-millis";
+    private static final String TIMESTAMP_MICROS = "timestamp-micros";
+    private static final String NULL = "null";
+
+    protected static final Map<String, LogicalType> avroSchemaTypeMapping = initAvroTypeMap();
+    protected static final Map<String, LogicalType> avroNullableSchemaTypeMapping = initAvroNullableTypeMap();
+    protected static final Map<String, String> hudiDataTypeMapping = initHudiDataTypeMap();
+
+    private TypeMapping() {}
+
+    private static HashMap<String, LogicalType> initAvroTypeMap() {
+        HashMap<String, LogicalType> schemaTypeMapping = new HashMap<>();
+        schemaTypeMapping.put(STRING, new VarCharType(false, VarCharType.MAX_LENGTH));
+        schemaTypeMapping.put(BYTES, new BinaryType(false, BinaryType.MAX_LENGTH));
+        schemaTypeMapping.put(INT, new IntType(false));
+        schemaTypeMapping.put(LONG, new BigIntType(false));
+        schemaTypeMapping.put(FLOAT, new FloatType(false));
+        schemaTypeMapping.put(DOUBLE, new DoubleType(false));
+        schemaTypeMapping.put(BOOLEAN, new BooleanType(false));
+        schemaTypeMapping.put(DATE, new DateType(false));
+        schemaTypeMapping.put(TIMESTAMP_MILLIS, new TimestampType(false, TimestampType.DEFAULT_PRECISION));
+        schemaTypeMapping.put(TIMESTAMP_MICROS, new TimestampType(false, TimestampType.DEFAULT_PRECISION));
+        schemaTypeMapping.put(NULL, new NullType());
+        return schemaTypeMapping;
+    }
+
+    private static HashMap<String, LogicalType> initAvroNullableTypeMap() {
+        HashMap<String, LogicalType> nullableSchemaTypeMapping = new HashMap<>();
+        nullableSchemaTypeMapping.put(STRING, new VarCharType(VarCharType.MAX_LENGTH));
+        nullableSchemaTypeMapping.put(BYTES, new BinaryType());
+        nullableSchemaTypeMapping.put(INT, new IntType());
+        nullableSchemaTypeMapping.put(LONG, new BigIntType());
+        nullableSchemaTypeMapping.put(FLOAT, new FloatType());
+        nullableSchemaTypeMapping.put(DOUBLE, new DoubleType());
+        nullableSchemaTypeMapping.put(BOOLEAN, new BooleanType());
+        nullableSchemaTypeMapping.put(DATE, new DateType());
+        nullableSchemaTypeMapping.put(TIMESTAMP_MILLIS, new TimestampType());
+        nullableSchemaTypeMapping.put(TIMESTAMP_MICROS, new TimestampType());
+        nullableSchemaTypeMapping.put(NULL, new NullType());
+        return nullableSchemaTypeMapping;
+    }
+
+    private static HashMap<String, String> initHudiDataTypeMap() {
+        HashMap<String, String> hudiDataTypeMapping = new HashMap<>();
+        hudiDataTypeMapping.put(STRING, "STRING");
+        hudiDataTypeMapping.put(BYTES, "BYTES");
+        hudiDataTypeMapping.put(INT, "INT");
+        hudiDataTypeMapping.put(LONG, "BIGINT");
+        hudiDataTypeMapping.put(FLOAT, "FLOAT");
+        hudiDataTypeMapping.put(DOUBLE, "DOUBLE");
+        hudiDataTypeMapping.put(BOOLEAN, "BOOLEAN");
+        hudiDataTypeMapping.put(DATE, "DATE");
+        hudiDataTypeMapping.put(TIMESTAMP_MILLIS, "TIMESTAMP");
+        hudiDataTypeMapping.put(TIMESTAMP_MICROS, "TIMESTAMP(3)");
+        return hudiDataTypeMapping;
+    }
+
+    public static HashMap<String, Object> MapAvro(Schema schema) {
+
+        Function<Field, String> m = (field) -> {
+
+            var s = field.schema();
+			s =  (s.getType().name().toUpperCase() == "UNION") ? s.getTypes().get(1) : s;
+
+			var logicalType = s.getLogicalType();
+			var name = (logicalType == null) ? s.getType().getName() : logicalType.getName();
+			name = name.toLowerCase();
+
+			return name;
+        };
+
+        final var result = new HashMap<String, Object>();
+        final var avro_list = new ArrayList<RowType.RowField>();
+        final var hudi_list = new ArrayList<String>();
+
+		var fields = schema.getFields();
+		for (int i = 0; i < fields.size(); i++) {
+
+			var field = fields.get(i);
+            var name = field.name();
+
+            var type_name = m.apply(field);
+            var hudi_type = TypeMapping.hudiDataTypeMapping.get(type_name);
+			var avro_type = TypeMapping.avroNullableSchemaTypeMapping.get(type_name);
+			avro_type = (avro_type == null) ? new VarCharType(VarCharType.MAX_LENGTH) : avro_type;
+
+            hudi_list.add(name + " " + hudi_type);
+			avro_list.add(new RowType.RowField(name, avro_type));
+		}
+
+        result.put("HUDI", hudi_list);
+        result.put("AVRO", avro_list);
+
+		return result;
+    }
+}
+
+---------------------------------------------------------------------
+
 var fields = Consume_Data.schema.getFields();
 		var size = fields.size();
 		final var list = new ArrayList<RowType.RowField>(size);
