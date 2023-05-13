@@ -1,3 +1,25 @@
+#!/bin/bash
+
+
+PKG_1="pkg-1/target/pkg-1-1.0.0.jar"
+PKG_MAIN="pkg-main/target/pkg-main-1.0.0.jar"
+
+echo "The order of the classpath is the class resolution precedence"
+java -cp "${PKG_1}:${PKG_MAIN}" com.song.example.Exe
+java -cp "${PKG_MAIN}:${PKG_1}" com.song.example.Exe
+
+echo
+
+
+-------------------------
+#!/bin/bash
+
+cd pkg-1
+mvn clean package
+
+cd ../pkg-main
+mvn clean package
+------------------------
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
