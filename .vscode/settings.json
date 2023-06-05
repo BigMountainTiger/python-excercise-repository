@@ -6,7 +6,7 @@
     "**/*.egg-info": true,
     "**/nn_data": true,
     "**/nn_model": true,
-    "**/.env-3.9": true,
+    "**/.env-3.*": true,
     "**/c-02-python-pdf-fargate/**/bin": true,
     "**/c-02-python-pdf-fargate/**/obj": true,
     "**/.pytest_cache": true,
