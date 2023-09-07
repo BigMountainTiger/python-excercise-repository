@@ -1,0 +1,10 @@
+1. Decorator is functionally equivalent a function take a function and returns a function
+2. The returned function should have the same signature (*args, **kwargs)
+3. Decorator can take advantages of closure to add functionalities
+4. The returned function should retain the original function's properties using "functools.wraps()", @wraps(original_function)
+5. A decorator with parameters is a function that takes the parameters and returns a decorator - https://stackoverflow.com/questions/5929107/decorators-with-parameters
+6. A decorator can be implemented as a class as well
+7. It is also possible to add parameters to a decorator in a class implementation - https://www.artima.com/weblogs/viewpost.jsp?thread=240845
+    - https://stackoverflow.com/questions/6394511/python-functools-wraps-equivalent-for-classes
+
+8. It is possible to decorate a method is a class - https://stackoverflow.com/questions/1263451/python-decorators-in-classes
