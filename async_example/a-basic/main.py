@@ -31,7 +31,8 @@ async def func_3(text, t):
     await asyncio.sleep(t)
     print(f'In func_3 - {text}')
 
-
-result = asyncio.run(func_1());
-print(result)
-print(f'Here - {result}')
+if __name__ == '__main__':
+    
+    result = asyncio.run(func_1())
+    print(result)
+    print(f'Here - {result}')
