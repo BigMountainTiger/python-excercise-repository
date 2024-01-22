@@ -1,0 +1,3 @@
+https://docs.pytest.org/en/7.4.x/how-to/usage.html#usage
+https://docs.pytest.org/en/7.4.x/reference/reference.html
+https://docs.pytest.org/en/7.4.x/reference/fixtures.html
