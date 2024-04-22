@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python -m pytest 2_fixture_example/example.py

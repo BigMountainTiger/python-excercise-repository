@@ -1,0 +1,28 @@
+https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa
+
+1. Add ppa
+In most systems, it is simply a command
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+
+2. Then install
+apt policy python3.12
+
+3. venv is installed as a different package
+apt policy python3.12-venv
+
+
+* It is possible to remove a ppa - https://askubuntu.com/questions/307/how-can-ppas-be-removed
+sudo add-apt-repository --remove ppa:deadsnakes/ppa
+
+
+4. If not possible to use add-apt-repository, the repository can be manually added
+* ppa are added to "/etc/apt/sources.list.d" as a file
+ls -l /etc/apt/sources.list.d
+cat /etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-jammy.list
+
+for example, deadsnakes is added to "/etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-jammy.list" file
+the gpg (https://www.gnupg.org/) file is downloaded in "/etc/apt/trusted.gpg.d/deadsnakes-ubuntu-ppa.gpg"
+
+download gpg - https://askubuntu.com/questions/1312464/how-to-get-the-gpg-key-for-a-repository
+

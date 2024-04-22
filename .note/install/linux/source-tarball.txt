@@ -1,0 +1,36 @@
+https://opensource.com/article/20/4/install-python-linux
+
+1. Make sure build-essential is updated
+sudo apt update
+sudo apt install build-essential zlib1g-dev \
+    libncurses5-dev libgdbm-dev libnss3-dev \
+    libssl-dev libreadline-dev libffi-dev curl -y
+
+2. Download the source release for the version to install - https://www.python.org/downloads/
+
+3. Unzip it in a directory
+tar -xf downloaded-file-name.tar.xz
+
+4. Go to the unziped directory
+./configure --prefix=location
+The location is where you want the python version installed", example, ~/Development/python3/python3.12
+
+It is possible to add "--enable-optimizations" flag. It claims to improve the compiled python performance by 10%
+and it takes a longer time, and may not succeed in some environment, in my use case, I just skipped it
+
+make
+make install
+
+5.Add symlink
+In Ubuntu, the ~/bin is automatically added to the PATH if available
+ln -sf "absolute path to python in the local install" ~/bin/python3.12 (If installing python3.12)
+
+6. Check if install was successful
+which python3.12
+python3.12 -m venv .env-3.12
+
+The venv is available to the installation from source by default
+
+
+
+
