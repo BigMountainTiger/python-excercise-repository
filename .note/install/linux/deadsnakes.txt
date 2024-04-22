@@ -25,4 +25,5 @@ for example, deadsnakes is added to "/etc/apt/sources.list.d/deadsnakes-ubuntu-p
 the gpg (https://www.gnupg.org/) file is downloaded in "/etc/apt/trusted.gpg.d/deadsnakes-ubuntu-ppa.gpg"
 
 download gpg - https://askubuntu.com/questions/1312464/how-to-get-the-gpg-key-for-a-repository
-
+GET - https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x<fingerprint> (fingerprint is found in PPA page)
+dearmor the asc file => "gpg --dearmor file.asc -o filename.gpg" to a proper name and put into the "/etc/apt/trusted.gpg.d" directory
