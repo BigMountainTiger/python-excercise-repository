@@ -28,6 +28,7 @@ def run():
 
     print()
     print('Indentation can be any size, as long as it is consistent in the code block')
+    print('But the formatter, ie. autopep8, will replace make the indentations consistent')
 
 
 if __name__ == '__main__':

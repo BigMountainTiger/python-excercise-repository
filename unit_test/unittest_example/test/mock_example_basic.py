@@ -1,4 +1,5 @@
 import unittest
+import os
 from unittest.mock import patch, Mock
 import outter
 
@@ -8,6 +9,10 @@ import pkg_basic
 
 
 class TestMock(unittest.TestCase):
+
+    def test_outter_00(self):
+        MY_ENV = os.environ.get('MY_ENV')
+        print(f'The MY_ENV is {MY_ENV}')
 
     def test_outter_01(self):
         EXPECTED = 'ABCD'

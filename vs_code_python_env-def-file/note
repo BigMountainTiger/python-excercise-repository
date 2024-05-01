@@ -3,6 +3,13 @@ For auto-complete:
 settings.json file
 ---------------------------------------------------------
 
+It looks like this is taking effect
+"python.analysis.extraPaths": [
+    "${workspaceFolder}/vs_code_python_env-def-file/libs"
+]
+
+Reading the documentation, could not understand what this does
+It seems that it can be removed from the settings.json file
 "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
 ]

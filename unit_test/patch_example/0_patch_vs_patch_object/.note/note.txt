@@ -1,0 +1,11 @@
+1. patch takes a string to the path of the item
+
+The patch target should be a string in the form 'package.module.ClassName'.
+The target is imported and the specified object replaced with the new object,
+so the target must be importable from the environment you are calling patch() from.
+The target is imported when the decorated function is executed,
+not at decoration time
+
+The path string "package.module.function" is the path accessible from where it is used
+
+2. patch_object takes an actual object

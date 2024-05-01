@@ -12,10 +12,14 @@
     "**/.pytest_cache": true,
     "**/.coverage": true
   },
+  "editor.minimap.enabled": false,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  // It looks like the "python.autoComplete.extraPaths" is not taking any effect
   "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
-  ]
+  ],
+  "python.terminal.activateEnvironment": false
 }

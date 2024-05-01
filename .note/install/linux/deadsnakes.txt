@@ -22,8 +22,11 @@ ls -l /etc/apt/sources.list.d
 cat /etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-jammy.list
 
 for example, deadsnakes is added to "/etc/apt/sources.list.d/deadsnakes-ubuntu-ppa-jammy.list" file
-the gpg (https://www.gnupg.org/) file is downloaded in "/etc/apt/trusted.gpg.d/deadsnakes-ubuntu-ppa.gpg"
+the gpg (https://www.gnupg.org/) file is placed in "/etc/apt/trusted.gpg.d/deadsnakes-ubuntu-ppa.gpg"
 
-download gpg - https://askubuntu.com/questions/1312464/how-to-get-the-gpg-key-for-a-repository
-GET - https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x<fingerprint> (fingerprint is found in PPA page)
-dearmor the asc file => "gpg --dearmor file.asc -o filename.gpg" to a proper name and put into the "/etc/apt/trusted.gpg.d" directory
+download gpg help - https://askubuntu.com/questions/1312464/how-to-get-the-gpg-key-for-a-repository
+CURL - curl -S "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x<fingerprint>" >key.asc,
+    where (fingerprint is found in PPA page)
+dearmor the asc file => "gpg --dearmor key.asc -o filename.gpg" and put into the "/etc/apt/trusted.gpg.d" directory,
+The name of the gpg file needs to follow the patten
+

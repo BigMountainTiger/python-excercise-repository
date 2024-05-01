@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // launch - unit_test/unit_test_example/test/mock_example_basic.py
+            "name": "mock_example_basic",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "unittest",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/unit_test/unit_test_example/test",
+            "args": [
+                "mock_example_basic.TestMock"
+            ],
+            "env": {
+                // Additional path for python modules
+                "PYTHONPATH": "${workspaceFolder}/unit_test/unit_test_example"
+            },
+            // The env file is a simple key value pair file, it is not a bash script
+            // the export keyword can cause problems
+            "envFile": "${workspaceFolder}/unit_test/unit_test_example/launch_env",
+            // "python": "${command:python.interpreterPath}"
+            // The python interpreter can be configured by "python", default is the workspace configured interpreter
+        }
+    ]
+}

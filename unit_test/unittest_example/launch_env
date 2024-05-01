@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# The env file is not a bash file, it is simply a list of key value pairs
+# export keyword is not needed and can cause problems
+
+MY_ENV="This is my env"
