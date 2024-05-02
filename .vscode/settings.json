@@ -21,5 +21,8 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
-  "python.terminal.activateEnvironment": false
+  "python.terminal.activateEnvironment": false,
+  // https://github.com/microsoft/vscode/issues/46900
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontFamily": "Ubuntu mono"
 }
