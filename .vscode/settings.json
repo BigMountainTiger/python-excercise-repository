@@ -13,13 +13,17 @@
     "**/.coverage": true
   },
   "editor.minimap.enabled": false,
-  "terminal.integrated.persistentSessionReviveProcess": "never",
+  // https://github.com/microsoft/vscode/issues/46900
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontFamily": "Ubuntu mono",
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.shellIntegration.enabled": false,
+  "python.terminal.activateEnvironment": false,
   // It looks like the "python.autoComplete.extraPaths" is not taking any effect
   "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
-  ],
-  "python.terminal.activateEnvironment": false
+  ]
 }

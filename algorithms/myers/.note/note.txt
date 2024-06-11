@@ -1,0 +1,20 @@
+Git source code
+https://github.com/git/git
+
+https://blog.jcoglan.com/2017/03/22/myers-diff-in-linear-space-theory/
+https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
+https://blog.jcoglan.com/2017/02/15/the-myers-diff-algorithm-part-2/
+https://blog.jcoglan.com/2017/02/17/the-myers-diff-algorithm-part-3/
+
+Git uses the linear space variant of the myers algorithm
+https://blog.jcoglan.com/2017/03/22/myers-diff-in-linear-space-theory/
+https://blog.jcoglan.com/2017/04/25/myers-diff-in-linear-space-implementation/
+
+linear space python
+https://blog.robertelder.org/diff-algorithm/
+
+More examples
+http://simplygenius.net/Article/DiffTutorial1
+http://simplygenius.net/Article/DiffTutorial2
+https://www.codeproject.com/Articles/42279/Investigating-Myers-diff-algorithm-Part-1-of-2
+https://www.codeproject.com/Articles/42280/Investigating-Myers-Diff-Algorithm-Part-2-of-2

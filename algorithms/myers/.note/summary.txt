@@ -1,0 +1,15 @@
+1. a typically represent old sequence => length N
+2. b typically represent old sequence => length M
+3. In the (N + 1) x (M + 1) working matrix, a is x axis (0 => N), b is y axis (0 => M)
+4. The index of the matrix does not represent a char, the movement between the ajacent indics represent the edit on the char
+    - The char is between the two ajacent indics
+    - ie. (0,0) -> (1,0) represents the deletioon of the 1st char of a
+        => a[0] in a base 0 language
+    - ie. (2,3) -> (2,4) represents the addition of the 4th char of
+        b => b[3] in a base 0 language
+    - ie. (1,2) -> (2,3) represents the 2nd char of a = the 3rd char of b
+        a[1] = b[2] in a base 0 language
+
+5. delta = N - M
+6. k = x - y (forward look up)
+7. c = k - delta = x - y - delta (backward lookup)

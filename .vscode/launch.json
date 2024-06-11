@@ -17,7 +17,8 @@
                 "PYTHONPATH": "${workspaceFolder}/unit_test/unit_test_example"
             },
             // The env file is a simple key value pair file, it is not a bash script
-            // the export keyword can cause problems
+            // 1. the export keyword can cause problems
+            // 2. If AWS resources are accessed, we can put the AWS required environment variables in the envFile
             "envFile": "${workspaceFolder}/unit_test/unit_test_example/launch_env",
             // "python": "${command:python.interpreterPath}"
             // The python interpreter can be configured by "python", default is the workspace configured interpreter

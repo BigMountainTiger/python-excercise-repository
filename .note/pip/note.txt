@@ -1,0 +1,4 @@
+Where pip install the packages?
+ - python -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'
+ - In a virtual env, it is ".env-3.12/lib/python3.12/site-packages"
+ - Of course, we can use "-t" option to specify the installation location

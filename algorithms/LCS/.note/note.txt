@@ -1,0 +1,7 @@
+longest common subsequence
+
+https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/
+
+https://www.youtube.com/watch?v=Ua0GhsJSlWM&ab_channel=NeetCode
+https://www.youtube.com/watch?v=Qf5R-uYQRPk&ab_channel=CSDojo
+

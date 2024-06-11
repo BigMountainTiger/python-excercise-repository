@@ -3,3 +3,6 @@
 git reset --soft HEAD~
 git add-commit -m "Updated the python-excercise-repository"
 git push -f
+
+echo -e "\nWait a second ..." && sleep 1
+git log -2

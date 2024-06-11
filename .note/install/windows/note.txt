@@ -1,0 +1,13 @@
+1. Download the windows installer
+    - https://www.python.org/downloads/windows/
+    - https://www.python.org/downloads/
+2. It is possible to make a PC level install, but I think it is better to make a user/local level install
+3. It is possible to install multiple versions
+4. There is only one copy of "py" launcher installed. If a new version of python is installed, the py launcher will be updated
+    - https://www.infoworld.com/article/3617292/how-to-use-pythons-py-launcher-for-windows.html
+    -   If you installed Python 3.8 and then Python 3.9, then 3.9 would upgrade py.
+        But if you upgraded your Python 3.8 installation afterward, 
+        py wouldn’t be touched since the installer would detect that a newer version already existed
+5. Remove the python entry from the PATH, so None of them is accessible (or leave the default one only?)
+6. Keep the "py" launcher in the PATH, and use it select the version and create venv
+7. To list the installed python versions - "py -0"

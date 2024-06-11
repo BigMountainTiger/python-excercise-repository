@@ -1,0 +1,6 @@
+If run in the "DPath" directory, need to export the environment variable
+
+    export PYTHONPATH=.
+
+The reason is "python classic/1_fore_snake.py" will automatically add the "classic" directory in the sys.path
+But we need the "DPath" to be in the sys.path

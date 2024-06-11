@@ -1,0 +1,8 @@
+https://stackoverflow.com/questions/24435697/python-is-the-current-directory-automatically-included-in-path
+Python adds the directory where the initial script resides as first item to sys.path:
+
+- As initialized upon program startup, the first item of this list, path[0]
+- It is "the directory containing the script" (Not necessarily the current directory) that was used to invoke the Python interpreter
+- If the script directory is not available (e.g. if the interpreter is invoked interactively or if the script is read from standard input),
+    path[0] is the empty string, which directs Python to search modules in the current directory first
+- Notice that the script directory is inserted before the entries inserted as a result of PYTHONPATH.
