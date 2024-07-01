@@ -1,0 +1,4 @@
+This version had deletion before addition
+    - The difference is the way to find the mid-snake
+    - This version searches from the top -> down (d >= k >= -d and d >= c >= -d)
+        This will create '-' before '+' edit sequence
