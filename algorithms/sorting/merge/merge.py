@@ -1,4 +1,5 @@
 import random
+from utils import utilities
 
 
 def merge_sort(d, n=None, m=None):
@@ -20,8 +21,10 @@ def merge_sort(d, n=None, m=None):
         l, li, l_last = d[n:mid + 1], 0, mid - n
         r, ri, r_last = d[mid + 1:m + 1], 0, m - mid - 1
 
+        # Both l & r are already sorted
         while li <= l_last or ri <= r_last:
-            if l[li] < r[ri]:
+            # The '<=' guranttees sorting stability
+            if l[li] <= r[ri]:
                 d[i], li, i = l[li], li + 1, i + 1
                 if li > l_last:
                     while ri <= r_last:
@@ -41,3 +44,5 @@ if __name__ == '__main__':
 
     merge_sort(d)
     print(d)
+
+    utilities.validate_sorted(d)
