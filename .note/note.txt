@@ -1,0 +1,32 @@
+
+{
+    // editor
+    "editor.minimap.enabled": false,
+    // explorer
+    "explorer.compactFolders": false,
+    // files
+    "files.eol": "\n",
+    "files.associations": {
+        ".yml": "yaml"
+    },
+    // terminal
+    // https://github.com/microsoft/vscode/issues/46900
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.fontFamily": "Ubuntu mono",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.enablePersistentSessions": false,
+    "terminal.integrated.shellIntegration.enabled": false,
+    // python
+    "python.terminal.activateEnvironment": false,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    // security
+    "security.workspace.trust.untrustedFiles": "open",
+    // workbench
+    "workbench.startupEditor": "none",
+    "workbench.localHistory.enabled": false,
+    // redhat
+    "redhat.telemetry.enabled": false
+}
