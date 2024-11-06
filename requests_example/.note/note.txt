@@ -1,0 +1,9 @@
+requests
+https://pypi.org/project/requests/
+
+document
+https://requests.readthedocs.io/en/latest/
+
+httpbin
+https://httpbin.org/
+
