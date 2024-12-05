@@ -1,3 +1,6 @@
+SELECT TRUNC(DATEADD('day', 1 - ROW_NUMBER() OVER (), '2024-12-03')) as d
+FROM a_table_has_enough_rows
+limit 365;
 
 {
     // editor
