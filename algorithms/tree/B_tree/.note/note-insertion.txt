@@ -1,0 +1,16 @@
+https://www.geeksforgeeks.org/insert-operation-in-b-tree/
+
+Insert key
+-----------------------------------------
+A key is always inserted into a leaf
+    - A key is always inserted into a leaf node
+    - The keys in a node is sorted
+    - It is convinent to compare the new key with the existing key list backward (from larger to smaller) to find the index for the new key
+
+Split node
+-----------------------------------------
+1. When inserting a key, if a node is full (n = 2*t -1) keys, it is splited, even though it is not a leaf
+2. When spliting a node
+    - Each child will have t - 1 keys
+    - Each child will have t children, if the splited node is not a leaf
+    - The middle key (2*t - 1) = (2*(t - 1) + 1) and the new child will be added into the parent

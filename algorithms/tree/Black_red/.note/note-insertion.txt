@@ -1,0 +1,25 @@
+https://www.geeksforgeeks.org/insertion-in-RED-BLACK-tree/?ref=lbp
+
+
+Insertion:
+Double RED is the violation
+
+- New node is always RED, when a new node is added to a RED node, we have a double RED situation
+- When double RED, we need to fix the color
+
+1. If 2 consecutive RED nodes and the aunt is RED -> flip the color
+    - Set the top node to RED
+    - Set the two childen of the top node to BLACK
+
+2. If 2 consecutive RED nodes and the aunt is BLACK -> rotate + fix color
+    - If the connected RED nodes is 'll' -> right rotate
+    - If the connected RED nodes is 'rr' -> left rotate
+    - If the connected RED nodes is 'lr' -> left rotate + right rotate
+    - If the connected RED nodes is 'rl' -> right rotate + left rotate
+    * After the rotation fix color
+        - Set the new top node to BLACK
+        - Set the two childen of the new top node RED (1 of them should be already RED)
+
+3. We need to recursively check for double RED and fix it if encountered until the root
+
+4. Always set the root as BLACK
