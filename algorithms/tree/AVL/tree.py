@@ -1,6 +1,11 @@
 # https://www.geeksforgeeks.org/introduction-to-avl-tree/
 # https://www.geeksforgeeks.org/avl-tree-in-python/#
-from utils import utilities
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+        self.height = 1
 
 
 def height(node):
@@ -91,7 +96,7 @@ def rotate(node):
 
 def insert(node, data):
     if node is None:
-        return utilities.Node(data)
+        return Node(data)
     elif data < node.data:
         node.left = insert(node.left, data)
     else:
@@ -139,8 +144,8 @@ class AVLTree:
 
     def insert(self, data):
         # It is better not to allow duplicates in a binary tree
-        # It is possible to make the data of the node to be an array,
-        # if duplicates are necessary, and search by a key
+        # If duplicates are absolutely necessary, it is better to make the data section of a node to be an array,
+        # but search the tree by the key
         self.root = insert(self.root, data)
 
     def delete(self, data):
