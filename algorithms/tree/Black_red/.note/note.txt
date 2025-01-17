@@ -1,0 +1,15 @@
+Rules:
+------------------------------------
+1. Every node is either RED or BLACK
+2. Root is always BLACK
+3. New insertions are always RED
+4. Every path from root-leaf has the same number of BLACK nodes
+5. No path can have two consecutive RED nodes (consecutive BLACK nodes are OK)
+6. Nulls are BLACK
+
+------------------------------------
+https://www.geeksforgeeks.org/introduction-to-red-black-tree/?ref=lbp
+
+- A red black tree is less balanced than an AVL tree, but it needs fewer rotations when nodes are inserted and deleted
+- This makes it ideal when there are a lot of insert an deletion operations
+- while AVL tree is more suitable for read-heavy situations

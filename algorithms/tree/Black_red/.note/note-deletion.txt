@@ -1,0 +1,63 @@
+https://www.geeksforgeeks.org/deletion-in-red-black-tree/?ref=lbp
+
+Deleton:
+Check double black
+https://www.geeksforgeeks.org/deletion-in-red-black-tree/
+
+Perform a standard delete - https://www.geeksforgeeks.org/deletion-in-binary-search-tree/
+    - The deleted node is a leaf
+    - The deleted node has only left child
+    - The deleted node has only right dhild
+    - No other possibilities during the deletion of a BST node
+
+Fix the color 
+https://blog.csdn.net/weixin_43790276/article/details/106600104
+
+simple case - single black
+    - If either the deleted node or its child is red
+    - Actually the only exception case is when the deleted node is a pure leaf (double black)
+        - because it is impossible a black node to have a single black child, black height is violated
+    - If the node is red, just delete it
+    - If the node is black, simply mark the red child to black after deleting the node
+
+Notations:
+    F -> Factor node, the node that cause the problem (The node to delete)
+    P -> Parent node of the factor node
+    S -> Sibling of F
+    SL -> Left child of S
+    SR -> Right child of S
+
+complicated case - double black encounted
+1. Sibling is black
+    1. If sibling s is black and at least one of sibling(S)’s children is red
+        - Case 1 => S is right child and SR is red -> left rotate
+            Mark the new parent the same color as the old parent
+            Mark the both new siblings black
+        - Case 2 => S is right child and SL is red (SR is not red)
+            Mark S red and SL black and right rotate s
+            This create the case 1
+        - Case 3 => S is left child and SL is red => Mirror case of Case 1
+        - Case 4 => S is left child and SR is red (SL is not red) => Mirror case of case 2
+        
+    2. If S is black and both SL and SR are black
+        - Make S red
+        - Mark P black if P is red => Done
+        - Move up if P is not red => Need to recursively update upper level
+            * This is the only case that the adjustment needs to populate the the upper level
+
+2. Sibling is red
+    This case both SL and SR must be black, and P must be black
+    Both SL and SR must be non-null, otherwise black height is violated
+    When F is causing double black, S needs to have black childen, so P is height balanced
+
+    - case 1 => S is right child
+        - Mark P red and S black => left rotate P
+        - At P (now it is the left child of S) -> It has a situation of Sibling (right) being black (deletion happens at the left),
+            because P is red, we can finish the adjustment
+
+    - case 2 => S is the left child => Mirror case of case 1
+        - Mark P black and S black => right rotate P
+        - At P (now it is the right child of S) -> It has a situaton of Sibling (left) being black (deletion happens at the right),
+            because P is red, we can finish the adjustment
+
+4. Always make sure the root is black

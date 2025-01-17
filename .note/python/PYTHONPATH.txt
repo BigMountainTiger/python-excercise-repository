@@ -6,3 +6,8 @@ Python adds the directory where the initial script resides as first item to sys.
 - If the script directory is not available (e.g. if the interpreter is invoked interactively or if the script is read from standard input),
     path[0] is the empty string, which directs Python to search modules in the current directory first
 - Notice that the script directory is inserted before the entries inserted as a result of PYTHONPATH.
+
+------------------------------------
+Put the following in the ~/.profile file
+# Always add "." (the path of the place where the python command is issued) to PYTHONPATH
+export PYTHONPATH=":$PYTHONPATH"
