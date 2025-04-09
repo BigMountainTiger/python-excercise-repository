@@ -1,4 +1,27 @@
+import pyspark.sql.types as T
 
+
+def generate_schema(key, value):
+
+    if key is None:
+        if isinstance(value, str):
+            return T.StringType()
+        elif isinstance(value, int):
+            return T.IntegerType()
+        elif isinstance(value, bool):
+            return T.BooleanType()
+        elif isinstance(value, dict):
+            type_list = []
+            for k, v in value.items():
+                type_list.append(generate_schema(k, v))
+
+            return T.StructType(type_list)
+        elif isinstance(value, list):
+            return T.ArrayType(generate_schema(None, value[0]))
+
+    return T.StructField(key, generate_schema(None, value), True)
+
+-------------------------------------------------------
 {
     // editor
     "editor.minimap.enabled": false,
