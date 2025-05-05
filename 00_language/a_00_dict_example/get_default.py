@@ -1,7 +1,7 @@
 def run():
   d = {}
 
-  print('1. Key not found - "get()" return the default value but the dictionary is not  modified')
+  print('1. Key not found - "get()" return the default value but the dictionary is not modified')
   a = d.get('A', 0)
   print(a)
   print(d)
