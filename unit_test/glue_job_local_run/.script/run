@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export PARAMETERS='{
+    "--parameter_1": "parameter_1_value",
+    "--parameter_2": "parameter_2_value",
+    "--parameter_3": "parameter_3_value" 
+}'
+
+python glue_test.py

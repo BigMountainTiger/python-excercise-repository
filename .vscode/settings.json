@@ -19,11 +19,18 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.shellIntegration.enabled": false,
   "python.terminal.activateEnvironment": false,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "autopep8.args": [
+    "--max-line-length=200"
+  ],
   // It looks like the "python.autoComplete.extraPaths" is not taking any effect
   "python.autoComplete.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
-  ]
+  ],
+  "gitlens.mode.active": "zen"
 }

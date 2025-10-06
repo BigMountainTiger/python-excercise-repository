@@ -1,0 +1,5 @@
+This is an example to use unittest to run glue jobs locally and more imporatantly
+ - to patch certain functions and variables that is not available locally
+
+ pip install awsglue-dev
+ pip install pyspark
