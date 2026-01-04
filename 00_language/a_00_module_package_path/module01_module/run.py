@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     # Expect the new text
     print()
-    text = 'New value'
-    print('The new value is assigned to the orginal variable through the module')
+    module.text = 'New value'
+    print('The new value is assigned to the original variable through the module')
     print(what_is_A())
 
