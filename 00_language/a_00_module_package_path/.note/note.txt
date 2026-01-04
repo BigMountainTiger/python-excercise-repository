@@ -1,0 +1,19 @@
+1. A module is just a .py file
+
+2. A package is a folder that contains the modules
+    - A module does not have to be in a package
+
+3. The sys.path object contains the list of the folders that the python interpreter looking for packages and modules
+    - The directory containing the top-level script (python top_level_script.py) is automatically added to the sys.path
+    - The PYTHONPATH environment variable (: separated linux, ; separated in windows list of folders) add in the front of the default sys.path
+    - It may a good idea to use absolute path in PYTHONPATH as the working directory may change
+    - We can manipulate the sys.path object in the python code, but it is generally not recommended
+
+4. The sys.modules obect keep all the modules already loaded
+    - The sys.modules is a directory, key is the full name of the module, the value contains the absolute path to the corresponding .py file
+    - If a package is imported, the "__file__" property is the __init__.py file in the package. If no __init__.py file (namespace package), it is None
+    - When the user code imports a module, python looks for sys.modules. If exists, it will just use it.
+      If not, it looks for the module by the order specified in the sys.path. If the folders in the sys.path are mutual exclusive, the same module will
+      be loaded only once
+    - Within a package, if importing modules in the same package, dot path (. or .. or ...) can be used
+    - dot importing beyong the top-level package is a run-time error (because the path will be beyond the sys.path)
