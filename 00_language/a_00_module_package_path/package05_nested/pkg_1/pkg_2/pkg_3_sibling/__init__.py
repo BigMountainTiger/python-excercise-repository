@@ -1,0 +1,1 @@
+print('__init__.py in pkg_1/pkg_2/pkg_3_sibling executed')
