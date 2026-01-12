@@ -1,0 +1,1 @@
+# This is an example module in an empty package.

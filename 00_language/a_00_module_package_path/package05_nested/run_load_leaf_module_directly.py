@@ -16,13 +16,10 @@ class UserModules:
             print(k)
             print(f'  -> {v.__file__}\n')
 
+
 if __name__ == '__main__':
-    # It is not a run-time error to import a package without __init__.py
-    # But it is just a namespace and no module is loaded until you import the modules directly
-    import package_1
+    import pkg_1.pkg_2.pkg_3.module_in_pkg3 as leaf_module
 
-    # A package without __init__.py the __file__ attribute is None, it is just a namespace package
-    # Need to import the module in it explicitly to use the module
-    assert package_1.__file__ is None
-
+    # 1. Directly importing a leaf module forces loading of all parent packages' __init__.py files in the sub-tree in the order from top-level to the leaf module
+    # 2. the pkg_3_sibling is not loaded because it is not in the sub-tree of the imported leaf module
     UserModules.print_user_modules()

@@ -1,0 +1,1 @@
+print('__init__.py in pkg_1 executed')
