@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PACKAGE_NAME="first_example_package"
+
+
+if [[ $1 == "-u" ]]; then
+    pip uninstall $PACKAGE_NAME -y
+elif [[ "$1" == "-i" ]]; then
+    pip install $PACKAGE_NAME \
+        --trusted-host localhost \
+        --index-url http://localhost:8080/simple
+else
+    echo "Do you want to install or uninstall?"
+    echo "-i => install"
+    echo "-u => uninstall"
+fi

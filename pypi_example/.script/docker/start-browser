@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+# Open the local docker pypi server in the default web browser
+xdg-open http://localhost:8080/simple/

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PACKAGE_DIR="$PROJECT_BASE/pypi_example/packages/first_example_package"
+cd $PACKAGE_DIR
+
+pwd
+
+twine upload dist/* --repository-url http://localhost:8080/ \
+    --username testuser --password testpass
