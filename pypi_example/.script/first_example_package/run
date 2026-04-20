@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python packages_clients/run.py

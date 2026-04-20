@@ -13,6 +13,7 @@
   },
   "files.exclude": {
     "**/.git": true,
+    "**/dist": true,
     "**/.virtual-env/*": true,
     "**/__pycache__": true,
     "**/*.egg-info": true,
@@ -44,5 +45,6 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
-  "gitlens.mode.active": "zen"
+  "gitlens.mode.active": "zen",
+  "workbench.colorTheme": "Dark Modern"
 }

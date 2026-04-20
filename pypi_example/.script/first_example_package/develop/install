@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PACKAGE_DIR="$PROJECT_BASE/pypi_example/packages/first_example_package"
+cd $PACKAGE_DIR
+
+if [[ $1 == "-u" ]]; then
+    pip uninstall first_example_package -y
+elif [[ "$1" == "-i" ]]; then
+    pip install -e .
+else
+    echo "Do you want to install or uninstall?"
+    echo "-i => install"
+    echo "-u => uninstall"
+fi

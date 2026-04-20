@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PACKAGE_DIR="$PROJECT_BASE/pypi_example/packages/first_example_package"
+cd $PACKAGE_DIR
+
+pwd
+
+rm -rf dist
+python -m build
