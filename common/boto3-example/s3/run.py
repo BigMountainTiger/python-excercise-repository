@@ -3,6 +3,7 @@ import time
 
 from datetime import datetime, timezone
 
+
 class Utility(object):
 
     @staticmethod
@@ -43,7 +44,7 @@ def run():
     exist = bucket.is_exist(key)
     print(exist)
 
-    # A valid directory 
+    # A valid directory
     key = 'AA/'
     exist = bucket.is_exist(key)
     print(exist)
@@ -67,7 +68,6 @@ def run():
 
     key = 'A'
     print(Utility.is_empty(key))
-
 
 
 if __name__ == '__main__':

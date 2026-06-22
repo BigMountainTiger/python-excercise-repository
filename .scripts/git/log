@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+
+git fetch
+
+echo "Changes in the last commit:"
+git diff HEAD~1 HEAD --name-only --color && echo
+
+if [[ $# -eq 0 ]]; then
+    git log -2
+else
+    git log "$@"
+fi

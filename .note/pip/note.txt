@@ -6,3 +6,4 @@ Where pip install the packages?
 
  pip install -r requirements.txt
   - if requirements.txt is empty the install is an no-op without any error
+  
