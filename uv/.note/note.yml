@@ -1,0 +1,31 @@
+Install & update & uninstall:
+  1. Install:
+    Use the official installation script: |
+      pushd ~/ATemp
+      curl -LsSf https://astral.sh/uv/install.sh -o uv-install.sh
+      sh uv-install.sh
+    Download zip from GitHub:
+      Download: |
+        VERSION=0.11.24
+        curl -LsSf https://releases.astral.sh/github/uv/releases/download/$VERSION/uv-x86_64-unknown-linux-gnu.tar.gz -o uv.tar.gz
+        mkdir -p uv-$VERSION
+        tar -xzf uv.tar.gz -C uv-$VERSION
+      Add a symbolic link to the binary (the following command may need small adjustments): |
+        ln -fs "$(pwd)/uv-$VERSION/uv-x86_64-unknown-linux-gnu/uv" ~/bin/uv
+
+  2. Uninstall:
+    Clean up cached data: |
+      uv cache clean
+      rm -r "$(uv python dir)"
+      rm -r "$(uv tool dir)"
+    Remove binaries:
+      If installed by the official installation script: |
+        rm ~/.local/bin/uv ~/.local/bin/uvx
+      If installed by downloading the zip:
+        1: remove the downloaded files
+        2: remove the symbolic link
+
+  3. Update:
+    If installed by the official installation script: |
+      uv self update
+    If installed by downloading the zip: Download the new version and change the symlink

@@ -46,6 +46,7 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/vs_code_python_env-def-file/libs"
   ],
+  "yaml.format.printWidth": 120,
   "git.autoRepositoryDetection": false,
   "workbench.colorTheme": "Dark Modern"
 }
