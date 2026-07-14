@@ -6,4 +6,4 @@ cd $PACKAGE_DIR
 pwd
 
 twine upload dist/* --repository-url http://localhost:8080/ \
-    --username testuser --password testpass
+	--username testuser --password testpass
