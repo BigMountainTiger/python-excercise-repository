@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PACKAGE_NAME="fast_factorial_repetition"
+PACKAGE_NAME="fast-factorial-repetition"
 
-PACKAGE_DIR="$PROJECT_BASE/pypi_c_extensions/1_NeuralNine_example/packages/$PACKAGE_NAME"
+PACKAGE_DIR="$PROJECT_BASE/pypi_c_extensions/1_NeuralNine_example/$PACKAGE_NAME"
 cd $PACKAGE_DIR
 pwd
 

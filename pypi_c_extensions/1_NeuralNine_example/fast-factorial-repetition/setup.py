@@ -4,7 +4,7 @@ setup(
     ext_modules=[
         Extension(
             name="fast_factorial_repetition",
-            sources=["src/fast_factorial_repetition.c"]
+            sources=["implementation/fast_factorial_repetition.c"]
         )
     ]
 )

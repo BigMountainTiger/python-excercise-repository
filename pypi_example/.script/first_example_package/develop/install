@@ -3,9 +3,17 @@
 PACKAGE_DIR="$PROJECT_BASE/pypi_example/packages/first_example_package"
 cd $PACKAGE_DIR
 
+clear_build_artifacts() {
+	rm -rf dist
+	rm -rf build
+}
+
 if [[ $1 == "-u" ]]; then
 	pip uninstall first_example_package -y
+	clear_build_artifacts
 elif [[ "$1" == "-i" ]]; then
+
+	clear_build_artifacts
 	pip install -e .
 else
 	echo "Do you want to install or uninstall?"

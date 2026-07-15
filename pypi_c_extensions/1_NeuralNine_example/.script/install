@@ -1,17 +1,22 @@
 #!/bin/bash
 
-PACKAGE_NAME="fast_factorial_repetition"
+PACKAGE_NAME="fast-factorial-repetition"
 
-PACKAGE_DIR="$PROJECT_BASE/pypi_c_extensions/1_NeuralNine_example/packages/$PACKAGE_NAME"
+PACKAGE_DIR="$PROJECT_BASE/pypi_c_extensions/1_NeuralNine_example/$PACKAGE_NAME"
 cd $PACKAGE_DIR
 pwd
 
-if [[ $1 == "-u" ]]; then
-	pip uninstall $PACKAGE_NAME -y
-elif [[ "$1" == "-i" ]]; then
+clear_build_artifacts() {
 	rm -rf dist
 	rm -rf build
+}
 
+if [[ $1 == "-u" ]]; then
+	pip uninstall $PACKAGE_NAME -y
+	clear_build_artifacts
+
+elif [[ "$1" == "-i" ]]; then
+	clear_build_artifacts
 	pip install .
 else
 	echo "Do you want to install or uninstall?"
