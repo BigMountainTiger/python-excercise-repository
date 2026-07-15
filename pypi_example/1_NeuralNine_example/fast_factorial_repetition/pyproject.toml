@@ -6,3 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "fast-factorial-repetition"
 version = "0.0.1"
 requires-python = ">=3.12"
+
+[[tool.setuptools.ext-modules]]
+language = "c"
+name = "fast_factorial_repetition"
+sources = ["implementation/fast_factorial_repetition.c"]
+extra-compile-args = []

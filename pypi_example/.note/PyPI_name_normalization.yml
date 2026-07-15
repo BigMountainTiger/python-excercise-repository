@@ -1,0 +1,7 @@
+Reference: https://packaging.python.org/en/latest/discussions/distribution-package-vs-import-package/
+
+Pypi package name:
+  Note: Hyphens are preferred
+  Normalization - pip treats the following exactly the same:
+    1: pip install my_package
+    2: pip install my-package

@@ -1,0 +1,78 @@
+pyproject.toml and setup.py:
+  As for now: Both can be used in the project
+  In the future: setup.py is deprecated
+  setup.py:
+    purpose: Define how the C code will be compiled
+    example: |
+      from setuptools import setup, Extension
+
+      setup(
+          ext_modules=[
+              Extension(
+                  name="fast_factorial_repetition",
+                  sources=["implementation/fast_factorial_repetition.c"]
+              )
+          ]
+      )
+
+  pyproject.toml:
+    purpose: the main project config
+    example: |
+      [[tool.setuptools.ext-modules]]
+      language = "c"
+      name = "fast_factorial_repetition"
+      sources = ["implementation/fast_factorial_repetition.c"]
+      extra-compile-args = []
+
+pyi files:
+  The "Type Stub" files: to provide intellisense
+
+In the fast_factorial_repetition.c file:
+  1. PY_SSIZE_T_CLEAN:
+    Yes: you must define PY_SSIZE_T_CLEAN on every .c file that uses PyArg_ParseTuple or Py_BuildValue
+    Placement: The macro must be defined before including <Python.h>
+
+  2. including <Python.h>:
+    Install: Need to install python3-dev or python3.12-dev (for a specific version)
+    vscode config:
+      location: .vscode/c_cpp_properties.json file
+      example: |
+        {
+          "configurations": [
+              {
+                  "name": "Linux",
+                  "includePath": [
+                      "/usr/include/python3.12"
+                  ],
+                  "defines": [],
+                  "compilerPath": "/usr/bin/gcc",
+                  "cStandard": "c17",
+                  "cppStandard": "gnu++17",
+                  "intelliSenseMode": "linux-gcc-x64"
+              }
+          ],
+          "version": 4
+        }
+
+  3. PyObject:
+    Definition: A PyObject is the fundamental C structure that represents every Python object in the CPython interpreter
+    Reference Count (ob_refcnt): Tracks how many variables point to the object, used by the garbage collector
+    Type Pointer (ob_type): Points to the type object (e.g., PyList_Type), defining its behaviors
+
+  4. PyMethodDef:
+  5. PyModuleDef:
+
+  6. PyMODINIT_FUNC:
+    Naming Consistency: >
+      The initialization function must be named exactly PyInit_<your_module_name>. 
+      If your file compiles into my_math.so, your function must be PyInit_my_math(void)
+    Return Value: >
+      Your initialization function must return either a successfully created module object pointer (PyObject*)
+      or NULL if an initialization error occurs.
+
+    Example: |
+      PyMODINIT_FUNC
+      PyInit_fast_factorial_repetition(void)
+      {
+          return PyModule_Create(&fastfactorialmodule);
+      }

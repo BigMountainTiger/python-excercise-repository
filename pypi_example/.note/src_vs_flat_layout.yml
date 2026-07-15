@@ -1,0 +1,41 @@
+Reference: https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/
+
+1. The setup.py is deprecated: Go with pyproject.toml whenever possible
+
+2. Project directory structure: |
+
+  my-package/
+  ├── pyproject.toml
+  ├── README.md
+  ├── LICENSE
+  ├── tests/
+  │   └── test_core.py
+  └── src/
+      └── my_package/
+          ├── __init__.py
+          └── core.py
+
+3. The src/ directory:
+  1: Never put __init__.py in the src folder, it should go into the src/my_package/ folder
+
+4. The pyproject.toml: |
+
+  [build-system]
+  requires = ["setuptools>=61.0.0"]
+  build-backend = "setuptools.build_meta"
+
+  [project]
+  name = "my-package"
+  version = "0.1.0"
+  description = "An awesome package using src layout"
+  readme = "README.md"
+  requires-python = ">=3.9"
+
+  # Most likely not needed
+  # Optional: Explicit configuration if auto-discovery fails
+  [tool.setuptools.packages.find]
+  where = ["src"]
+
+5. Common practice:
+  1: The project name use "-" => "my-package" => easier for pip
+  2: The package folder use "_" => "my_package" => It can be imported by python
