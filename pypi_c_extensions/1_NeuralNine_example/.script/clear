@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PACKAGE_NAME="fast_factorial_repetition"
+
+PACKAGE_DIR="$PROJECT_BASE/pypi_c_extensions/1_NeuralNine_example/packages/$PACKAGE_NAME"
+cd $PACKAGE_DIR
+
+
+pip uninstall $PACKAGE_NAME -y
+
+rm -rf build && echo "Cleared build"
+rm -rf dist && echo "Cleared dist"

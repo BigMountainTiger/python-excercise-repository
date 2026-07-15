@@ -1,0 +1,8 @@
+dependencies:
+  1: sudo apt install build-essential
+  2: sudo apt install python3.12-dev
+
+python dependencies:
+  1: build
+  2: twine
+  3: setuptools
