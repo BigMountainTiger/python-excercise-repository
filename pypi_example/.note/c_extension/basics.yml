@@ -15,6 +15,22 @@ pyproject.toml and setup.py:
           ]
       )
 
+    advantages - get list of *.c files: |
+      pythonimport glob
+      from setuptools import setup, Extension
+
+      # This dynamically grabs all .c files in your directory
+      c_sources = glob.glob("src/*.c")
+
+      setup(
+          ext_modules=[
+              Extension(
+                  name="my_package.my_module",
+                  sources=c_sources,
+              )
+          ]
+      )
+
   pyproject.toml:
     purpose: the main project config
     example: |
@@ -26,6 +42,7 @@ pyproject.toml and setup.py:
 
 pyi files:
   The "Type Stub" files: to provide intellisense
+  Example: look for the 1_NeuralNine_example for the __init__.pyi file
 
 In the fast_factorial_repetition.c file:
   1. PY_SSIZE_T_CLEAN:
