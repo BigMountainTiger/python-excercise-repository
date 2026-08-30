@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_DIR="$PROJECT_BASE/pypi_example/packages/first_example_package"
+PACKAGE_DIR="$PROJECT_BASE/pypi_example/0_first_example_package/packages/first_example_package"
 cd $PACKAGE_DIR
 
 clear_build_artifacts() {

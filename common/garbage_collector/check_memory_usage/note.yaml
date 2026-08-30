@@ -1,0 +1,2 @@
+1: psutil is a pretty good tool to check memory usage
+2: GC collected the memory immediately when the object is de-referenced
