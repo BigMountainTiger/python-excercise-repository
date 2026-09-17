@@ -1,0 +1,57 @@
+In a Python C extension:
+    1: you can safely remove the static keyword from your C functions
+    2: but you must implement a naming convention or a separate header file if you need to call them across different files
+
+# Example:
+1. Create the Shared Helper (operations.c): |
+    #include <Python.h>
+
+    // No "static" keyword so it can be seen by other C files
+    int internal_c_calculator(int a, int b) {
+        return a + b;
+    }
+
+2. Declare it in a Header (operations.h): |
+    #ifndef OPERATIONS_H
+    #define OPERATIONS_H
+
+    int internal_c_calculator(int a, int b);
+
+    #endif
+
+3. Call it from the Python Wrapper (mymodule.c): |
+    #define PY_SSIZE_T_CLEAN
+    #include <Python.h>
+    #include "operations.h" // Include your header
+
+    // The Python wrapper remains static to protect the global namespace
+    static PyObject *py_add(PyObject *self, PyObject *args) {
+        int a, b;
+        if (!PyArg_ParseTuple(args, "ii", &a, &b)) {
+            return NULL;
+        }
+        
+        // Call your non-static helper function
+        int result = internal_c_calculator(a, b); 
+        
+        return Py_BuildValue("i", result);
+    }
+
+    static PyMethodDef MyMethods[] = {
+        {"add", py_add, METH_VARARGS, "Adds two numbers"},
+        {NULL, NULL, 0, NULL}
+    };
+
+    static struct PyModuleDef mymodule = {
+        PyModuleDef_HEAD_INIT, "mymodule", NULL, -1, MyMethods
+    };
+
+    // The initialization function MUST be non-static so Python can load it
+    PyMODINIT_FUNC PyInit_mymodule(void) {
+        return PyModuleDef_Init(&mymodule);
+    }
+
+Note:
+    C function / type names are all at the global level:
+        1: It is simple
+        2: it can easily gets into name collisions
