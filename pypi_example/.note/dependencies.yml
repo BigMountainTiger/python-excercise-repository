@@ -6,3 +6,4 @@ python dependencies:
 Used by build c extensions:
   1: sudo apt install build-essential
   2: sudo apt install python3.12-dev
+  3: sudo apt install cmake
