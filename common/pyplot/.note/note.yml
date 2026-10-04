@@ -1,0 +1,14 @@
+Install:
+  1:
+    tk: sudo apt install python3.11-tk
+    note: |
+      Need to install the version specific tk package, 
+      e.g., python3.11-tk for Python 3.11, python3.14-tk for Python 3.14
+  2:
+    matplotlib: pip install matplotlib
+
+Run: |
+  import matplotlib
+  import matplotlib.pyplot as plt
+
+  matplotlib.use('TkAgg')
