@@ -1,0 +1,14 @@
+Annotations:
+  most commonly used:
+    • @jit: Compiles a Python function into native machine code, running in either fast nopython mode or fallback object mode.
+    • @njit: 
+        1: Acts as a shortcut for @jit(nopython=True), forcing the compiler to run without the Python interpreter for maximum speed
+        2: Always use @njit, never use @jit
+    • @vectorize: Turns a scalar function into a NumPy universal function (ufunc) to compute across arrays efficiently.
+  others:
+    • @guvectorize: Extends @vectorize to handle generalized universal functions with input/output arrays of different dimensions.
+    • @stencil: Creates a kernel function for sliding-window or stencil operations commonly used in grid data and image processing.
+    • @jitclass: Compiles a Python class into a C-compatible structure with typed fields.
+    • @cfunc: Generates a C-compatible function pointer from a Python function for calling from external C libraries.
+    • @overload: Allows writing custom implementations for specific types inside other Numba-compiled functions.
+    • @generated_jit: Lets you choose a specific implementation variant at compile time based on argument types

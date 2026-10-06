@@ -1,0 +1,9 @@
+References:
+  - https://www.youtube.com/watch?v=x58W9A2lnQc&t=1060s
+
+Examples:
+  1: https://gist.github.com/safijari/fa4eba922cea19b3bc6a693fe2a97af7
+
+numba:
+  Works: numpy
+  Does not work: pandas
