@@ -18,6 +18,7 @@ positions = np.zeros_like(times)
 
 def rk4_step(A, X, h):
     # It seems faster without numba njit :D
+    # numpy may have already optimized the matrix multiplication
     k_1 = h * A @ X
     k_2 = h * A @ (X + 0.5 * k_1)
     k_3 = h * A @ (X + 0.5 * k_2)
